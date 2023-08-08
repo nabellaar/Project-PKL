@@ -17,26 +17,26 @@ use App\Http\Controllers\IndexController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('pages.home');
 });
 
 Route::get('/my_topics', function () {
     // Tambahkan logika untuk menampilkan halaman My Topics di sini
-    return view('topics');
+    return view('pages.topics');
 });
 
 Route::get('/my_answers', function () {
     // Tambahkan logika untuk menampilkan halaman My Answers di sini
-    return view('answers');
+    return view('pages.answers');
 });
 
 Route::get('/all_response', function () {
     // Tambahkan logika untuk menampilkan halaman response di sini
-    return view('response');
+    return view('pages.response');
 });
 
 Route::get('/liked_topics', function () {
-    return view('liked');
+    return view('pages.liked');
 });
 
 Route::get('/create', function () {
@@ -46,9 +46,9 @@ Route::get('/create', function () {
 
 Route::post('/topics', 'TopicController@store');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/', [IndexController::class, 'home'])->name('home');
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/', [IndexController::class, 'home'])->name('home');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
