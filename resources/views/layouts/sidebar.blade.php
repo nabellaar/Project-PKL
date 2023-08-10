@@ -42,6 +42,8 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <form action="{{ route('topic.store')}}" method="post" enctype="multipart/form-data">
+                    @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="commentModalLabel" style="color: #000000;">Create your topic</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -51,18 +53,23 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="commentTitle" style="color: #435AE7;">Title</label>
-                        <input type="text" class="form-control" id="commentTitle" name="commentTitle" required>
+                        <input type="text" class="form-control" id="commentTitle" name="title" required>
                     </div>
                     <div class="form-group">
                         <label for="commentContent" style="color: #435AE7;">Content</label>
-                        <textarea class="form-control" id="commentContent" name="commentContent" rows="5"
+                        <textarea class="form-control" id="commentContent" name="content" rows="5"
                             required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="commentImage" style="color: #435AE7;">Image</label>
+                        <input type="file" class="form-control" id="commentContent" name="image" accept="image/*">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
+            </form>
             </div>
         </div>
     </div>
