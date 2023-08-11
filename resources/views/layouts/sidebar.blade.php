@@ -16,7 +16,7 @@
     </li>
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url('/my_topics') }}">
+        <a class="nav-link collapsed" href="{{ url('/topic') }}">
             <span class="mx-3">My Topics</span>
         </a>
     </li>

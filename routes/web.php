@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TopicController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +20,8 @@ use App\Http\Controllers\TopicController;
 */
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
+    Route::get('data-topic', [DashboardController::class, 'getDataTopic'])->name('data.topic');
     Route::resource('topic', TopicController::class);
-    
-    Route::get('/my_topics', function () {
-        // Tambahkan logika untuk menampilkan halaman My Topics di sini
-        return view('pages.topics');
-    });
     
     Route::get('/my_answers', function () {
         // Tambahkan logika untuk menampilkan halaman My Answers di sini
