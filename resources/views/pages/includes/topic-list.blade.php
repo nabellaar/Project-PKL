@@ -4,6 +4,9 @@
     <div class="card-body">
         <h5 style="color: #435AE7">{{ $item->title }}</h5>
         <p style="color:#000; font-size: 15px; margin-top: 15px;">{{ $item->content }}</p>
+        <div class="text-center">
+            <img src="{{ asset('img/'.$item->image) }}" alt="" class="img-fluid">
+        </div>
         <hr style="margin-top: 30px;">
         <img class="rounded-circle" style="height: 30px;"
             src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) : asset('img/profile/default.jpg') }}"
@@ -17,7 +20,7 @@
     </div>
     <div class="card-footer">
         <button class="btn-edit" onclick="modalEdit({{$item->id}});">Edit</button>
-        <button class="btn-dlt">Delete</button>
+        <button class="btn-dlt" onclick="deleteTopic(event, {{$item->id}}, '{{$item->title}}')">Delete</button>
     </div>
 </div>
 @endforeach
@@ -30,8 +33,8 @@
         border-radius: 5px;
     }
     .btn-dlt {
-        border-color: #435AE7;
-        color: #435AE7;
+        border-color: red;
+        color: red;
         background-color: white;
         border-radius: 5px;
     }
@@ -40,7 +43,7 @@
         color: white;
     }
     .btn-dlt:hover {
-        background-color: #435AE7;
+        background-color: red;
         color: white;
     }
     .card-footer {

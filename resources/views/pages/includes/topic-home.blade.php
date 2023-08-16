@@ -15,6 +15,9 @@
     <div class="card-body">
         <h5 class="user-title">{{ $item->title }}</h5>
         <p class="user-content">{{ $item->content }}</p>
+        <div class="text-center">
+            <img src="{{ asset('img/'.$item->image) }}" alt="" class="img-fluid">
+        </div>
         <button class="btn-response p-2 justify-content-center my-3" data-toggle="modal" data-target="#commentModal"><i class="fa-solid fa-share"></i> Add Response</button>
         <button class="btn-like p-2 my-3 justify-content-center"><i class="fa-solid fa-thumbs-up"></i> Like</button>
         <a href="/all_response">

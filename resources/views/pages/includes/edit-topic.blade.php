@@ -7,6 +7,9 @@
               </button>
         </div>
         <div class="modal-body">
+            <div class="alert alert-danger error-msg" role="alert" style="display: none">
+                <ul></ul>
+            </div>
             <form id="form-edit-topic" action="" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')

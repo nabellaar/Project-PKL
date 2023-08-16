@@ -9,6 +9,8 @@
         </div>
         <!-- Area Chart -->
         <div class="col-xl-12 col-lg-7">
+            <div class="alert alert-success success-msg" role="alert" style="display: none">
+            </div>
             <div class="row" id="content-topic">
             </div>
         </div>
@@ -49,6 +51,53 @@
                     $('#exampleModal').modal('show');
                 }
             });
+        }
+
+        function saveUpdate(id) {
+            var data = new FormData($('#form-edit-topic')[0])
+            $.ajax({
+                type: "POST",
+                url: "{{ url('topic') }}/"+id,
+                data: data,
+                contentType: false,
+                processData: false,
+                cache: false,
+                success: function (response) {
+                    //console.log(response);
+                    if (response.status == false) {
+                        $(".error-msg").show();
+                        $.each(response.data, function (key, value) { 
+                             $(".error-msg").find("ul").append("<li>" + value + "</li>");
+                        });
+                    } else {
+                        $('#exampleModal').modal('hide');
+                        $('#form-edit-topic').trigger('reset');
+                        $(".success-msg").html(response.message).show();
+                        getTopic(url)
+                    }
+
+                }
+            });
+        }
+
+        function deleteTopic(e, id, title) {
+            var result = confirm('Apakah Anda Yakin Menghapus Topic  '+title+' ? ')
+            if (result) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "{{ url('topic') }}/"+id,
+                    cache: false,
+                    headers: {
+                        'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        $(".success-msg").html(response.message).show();
+                        getTopic(url)
+                    }
+                });
+            } else {
+                alert('Data Aman!')
+            }
         }
     </script>
 @endsection
