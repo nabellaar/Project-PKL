@@ -19,12 +19,21 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <style>
+        .bg-register {
+            background-image: url('../img/bgregister.jpg');
+            background-size: cover;
+        }
+        .card-register {
+            margin-top: 100px;
+        }
+    </style>
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary bg-register">
 
-    <div class="container">
+    <div class="card-register container">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">

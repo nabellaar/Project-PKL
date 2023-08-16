@@ -36,7 +36,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/liked_topics', function () {
         return view('pages.liked');
     });
-    
+
+    Route::get('/profile', function () {
+        return view('pages.profile');
+    });
+
     Route::get('/create', function () {
         // Tambahkan logika untuk menampilkan halaman new topics di sini
         return view('create');

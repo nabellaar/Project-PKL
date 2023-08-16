@@ -3,9 +3,9 @@
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
         <div class="dropdown no-arrow">
-            <img style="height :60px; " src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) :asset('img/profile/default.jpg') }}" alt="">
+            <img class="rounded-circle" style="height :60px; " src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) :asset('img/profile/default.jpg') }}" alt="">
             <h5 class="user-name">{{ $item->user->name }}</h5>
-            <p style="margin-left: 70px; font-size: 13px;">{{ date('d M Y', strtotime($item->updated_at)) }}</p>
+            <p class="user-date">{{ date('d M Y', strtotime($item->updated_at)) }}</p>
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             </a>
@@ -13,15 +13,12 @@
     </div>
     <!-- Card Body -->
     <div class="card-body">
-        <h5 style="color: #435AE7;">{{ $item->title }}</h5>
-        <p style="color:#000; font-size: 15px;">{{ $item->content }}</p>
-        <button class="p-2 justify-content-center my-3" style="text-decoration: none; background-color: #fff; color: #435AE7; border-color:#435AE7 ;
-            border-radius: 10px; font-size: 15px;" data-toggle="modal" data-target="#commentModal"><i class="fa-solid fa-share" style="color: #435ae7;"></i> Add Response</button>
-        <button class="p-2 my-3 justify-content-center" style="text-decoration: none; background-color: #fff; color: #435AE7; border-color:#435AE7 ;
-            border-radius: 10px; font-size: 15px;"><i class="fa-solid fa-thumbs-up" style="color: #435ae7;"></i> Like</button>
+        <h5 class="user-title">{{ $item->title }}</h5>
+        <p class="user-content">{{ $item->content }}</p>
+        <button class="btn-response p-2 justify-content-center my-3" data-toggle="modal" data-target="#commentModal"><i class="fa-solid fa-share"></i> Add Response</button>
+        <button class="btn-like p-2 my-3 justify-content-center"><i class="fa-solid fa-thumbs-up"></i> Like</button>
         <a href="/all_response">
-            <button class="p-2 my-3 justify-content-center" style="text-decoration: none; background-color: #fff; color: #435AE7; border-color:#435AE7 ;
-            border-radius: 10px; font-size: 15px; color: #435AE7; margin-left: 51%; margin-top: -17px">See all response ></button>
+            <button class="btn-see-rspn p-2 my-3 justify-content-center">See all response ></button>
         </a>
         <p style="color: #435AE7; font-size: 15px;" class="my-1">15 Answers</p>
     </div>
@@ -49,3 +46,49 @@
 
 </div>
 @endforeach
+@section('styles')
+<style>
+    .user-name{
+        margin-left: 70px; 
+        color:#000; 
+        margin-top: -50px; 
+        font-size: 17px;
+    }
+    .user-date {
+        margin-left: 70px; 
+        font-size: 13px;
+    }
+    .user-title {
+        color: #435AE7;
+    }
+    .user-content {
+        color:#000; 
+        font-size: 15px;
+    }
+    .btn-response {
+        text-decoration: none; 
+        background-color: #fff; 
+        color: #435AE7; 
+        border-color:#435AE7 ;
+        border-radius: 10px; 
+        font-size: 15px;"
+    }
+    .btn-like {
+        text-decoration: none; 
+        background-color: #fff; 
+        color: #435AE7; border-color:#435AE7 ;
+        border-radius: 10px; 
+        font-size: 15px;"
+    }
+    .btn-see-rspn {
+        text-decoration: none; 
+        background-color: #fff; 
+        color: #435AE7; 
+        border-color:#435AE7 ;
+        border-radius: 10px; 
+        font-size: 15px; 
+        color: #435AE7; 
+        margin-left: 51%; 
+        margin-top: -17px
+    }
+</style>

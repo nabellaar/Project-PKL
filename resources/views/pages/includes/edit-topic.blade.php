@@ -22,11 +22,11 @@
                 <div class="form-group">
                     <label for="commentContent" style="color: #435AE7;">Status</label>
                     <div class="form-check">
-                        <input class="form-check-input" id="flexRadioDefault1" type="radio" name="status" @if($topic->status ==1) checked @endif>
+                        <input class="form-check-input" id="flexRadioDefault1" type="radio" name="status" value="1" @if($topic->status ==1) checked @endif>
                         <label class="form-check-label" for="flexRadioDefault1">Publish</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" id="flexRadioDefault2" type="radio" name="status" @if($topic->status ==2) checked @endif>
+                        <input class="form-check-input" id="flexRadioDefault2" type="radio" name="status" value="2" @if($topic->status ==2) checked @endif>
                         <label class="form-check-label" for="flexRadioDefault2">Draft</label>
                     </div>
                 </div>

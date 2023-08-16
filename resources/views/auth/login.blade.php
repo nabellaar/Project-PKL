@@ -19,12 +19,21 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .bg-login {
+            background-image: url('../img/bglogin.jpg');
+            background-size: cover;
+        }
+        .card-login {
+            margin-top: 100px;
+        }
+    </style>
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-login bg-gradient-primary">
 
-    <div class="container">
+    <div class="card-login container">
 
         <!-- Outer Row -->
         <div class="row justify-content-center">
