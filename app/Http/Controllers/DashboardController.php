@@ -9,12 +9,19 @@ class DashboardController extends Controller
 {
     public function index ()
     {
-        return view('pages.home');
+        $topic = Topic::orderBy('id', 'DESC')->paginate(5);
+        return view('pages.home', compact('topic'));
     }
 
-    public function getDataTopic(Request $request)
+    public function searchTopic(Request $request)
     {
-        $topic = Topic::all();
-        return view('pages.includes.topic-home', compact('topic'));
+        $keyword = $request->keyword;
+        $topic = Topic::where('title', 'like', '%'.$keyword.'%')->orWhereHas('user', function($q) use($keyword) {
+        $q->where('name', 'like', '%'.$keyword.'%');
+       })
+       ->orderby('id', 'DESC')
+       ->paginate(5);
+
+       return view('pages.search', compact('topic'));
     }
 }

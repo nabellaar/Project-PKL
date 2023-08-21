@@ -47,9 +47,18 @@
                             <form class="user" method="POST" action="{{ route('register') }}">
                                 @csrf  
                                 <div class="form-group">
-                                        <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control form-control-user @error('name') is-invalid @enderror" required autofocus
-                                            placeholder="Name">
-                                            @error('name')
+                                        <input type="text" id="username" name="username" value="{{old('username')}}" class="form-control form-control-user @error('username') is-invalid @enderror" required autofocus
+                                            placeholder="Username">
+                                            @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                </div>
+                                <div class="form-group">
+                                        <input type="text" id="full_name" name="full_name" value="{{old('full_name')}}" class="form-control form-control-user @error('full_name') is-invalid @enderror" required autofocus
+                                            placeholder="Full name">
+                                            @error('full_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

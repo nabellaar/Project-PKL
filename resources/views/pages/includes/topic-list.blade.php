@@ -15,8 +15,8 @@
                 $item->user->name }}</span></p>
         <p style="font-size: 12px; margin-left: 30%; margin-top: -33px;">{{ date('d M Y', strtotime($item->updated_at))
             }}</p>
-        <p style="margin-left: 80%; margin-top: -30px; color: #435AE7; font-size: 15px;">see all
-            response ></p>
+        <a href="{{ url('topic/'. encrypt($item->id)) }}" style="margin-left: 80%; margin-top: -30px; color: #435AE7; font-size: 15px;">see all
+            response ></a>
     </div>
     <div class="card-footer">
         <button class="btn-edit" onclick="modalEdit({{$item->id}});">Edit</button>
@@ -24,6 +24,7 @@
     </div>
 </div>
 @endforeach
+{{ $topic->appends($_GET)->links() }}
 @section('@style')
 <style>
     .btn-edit {

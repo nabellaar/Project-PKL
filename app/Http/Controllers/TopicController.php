@@ -19,7 +19,7 @@ class TopicController extends Controller
     {
         if ($request->ajax()) {
             $topic = Topic::where('user_id', Auth::user()->id)
-            ->get();
+            ->paginate(5);
             return view('pages.includes.topic-list', compact('topic'));
         }
         return view('pages.topics',);
@@ -63,11 +63,11 @@ class TopicController extends Controller
         }
 
         $topic = Topic::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'slug' => Str::slug($request->title),
-            'user_id' => Auth::user()->id,
-            'status' => 1
+            'title'     => $request->title,
+            'content'   => $request->content,
+            'slug'      => Str::slug($request->title),
+            'user_id'   => Auth::user()->id,
+            'status'    => 1
         ]);
 
         if ($request->hasFile('image')){
@@ -96,7 +96,9 @@ class TopicController extends Controller
      */
     public function show($id)
     {
-        //
+        $topic_id   = decrypt($id);
+        $topic      = Topic::find($topic_id);
+        return view('pages.response', compact('topic'));
     }
 
     /**

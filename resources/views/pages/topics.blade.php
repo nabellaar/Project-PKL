@@ -37,6 +37,11 @@
                 success: function (response) {
                  $('#load-icon').hide();  
                  $('#content-topic').html(response); 
+                 $('ul.pagination a').click(function (e) { 
+                    e.preventDefault();
+                    var href = $(this).attr('href');
+                    getTopic(href)
+                 });
                 }
             });
         }
