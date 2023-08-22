@@ -5,7 +5,7 @@
     <!-- Content Row -->
     <div class="row">
         <!-- TopicHome -->
-        <div class="col-xl-8 col-lg-7">
+        <div class="col-xl-12 col-lg-7">
             <div class="col-12 text-center" id="load-icon" style="display: none">
                 <img width="50px" src="{{ asset('img/loading.gif')}}" alt="">
             </div>
@@ -19,7 +19,7 @@
                                 <img class="rounded-circle" style="height :60px; "
                                     src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) :asset('img/profile/default.jpg') }}"
                                     alt="">
-                                <h5 class="user-name">{{ $item->user->name }}</h5>
+                                <h5 class="user-name">{{ $item->user->full_name }}</h5>
                                 <p class="user-date">{{ date('d M Y', strtotime($item->updated_at)) }}</p>
                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

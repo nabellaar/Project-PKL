@@ -11,9 +11,9 @@
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
                         <div class="dropdown no-arrow">
-                            <img style="height :50px; " src="img/mark.png" alt="">
+                            <img class="rounded-circle" style="height :50px; " src="{{ $topic->user->foto ? asset('img/profile/'.$topic->user->foto) :asset('img/profile/default.jpg') }}" alt="">
                             <h5 style="margin-left: 60px; color:#000; margin-top: -45px; font-size: 15px;">
-                                {{ $topic->user->name }}</h5>
+                                {{ $topic->user->username }}</h5>
                             <p style="margin-left: 60px; font-size: 12px;">{{ date('d M Y',
                                 strtotime($topic->updated_at))
                                 }}</p>
@@ -25,14 +25,14 @@
                         <p style="color:#000; font-size: 15px;">{{ $topic->content }}</p>
                         <p style="color :#435AE7; font-size: 15px; margin-top: 35px;">10 Answer</p>
                         <hr>
-                        <img style="height: 50px; margin-left: 20px;" src="img/nala.png" alt="">
+                        <img class="rounded-circle" style="height: 50px; margin-left: 20px;" src="{{ $topic->user->foto ? asset('img/profile/'.$topic->user->foto) :asset('img/profile/default.jpg') }}" alt="">
                         <h5 style="font-size: 15px; color: #000; margin-left: 80px; margin-top: -40px;">Monica David
                         </h5>
                         <p style="font-size: 12px; margin-left: 80px; margin-top: -5px;">4d ago</p>
                         <p style="color: #000; margin-left: 20px; font-size: 15px; margin-top: 25px;">Define the
                             objective, identify the audience, choose the domain name,
                             plan the content, design the look, and set the budget and timeline.</p>
-                        <img style="height: 50px; margin-left: 20px;" src="img/nala.png" alt="">
+                        <img class="rounded-circle" style="height: 50px; margin-left: 20px;" src="{{ $topic->user->foto ? asset('img/profile/'.$topic->user->foto) :asset('img/profile/default.jpg') }}" alt="">
                         <h5 style="font-size: 15px; color: #000; margin-left: 80px; margin-top: -40px;">Monica David
                         </h5>
                         <p style="font-size: 12px; margin-left: 80px; margin-top: -5px;">4d ago</p>

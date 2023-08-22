@@ -35,12 +35,12 @@
                             </div>
                             <button class="btn-response p-2 justify-content-center my-3" data-toggle="modal"
                                 data-target="#commentModal"><i class="fa-solid fa-share"></i> Add Response</button>
-                            <button class="btn-like p-2 my-3 justify-content-center"><i class="fa-solid fa-thumbs-up"></i>
-                                Like</button>
-                            <a href="{{ url('topic/'. encrypt($item->id)) }}">
-                                <button class="btn-see-rspn p-2 my-3 justify-content-center">See all response ></button>
-                            </a>
-                            <p style="color: #435AE7; font-size: 15px;" class="my-1">15 Answers</p>
+                                <button class="btn @if (!user_likes(Auth::user()->id, $item->id)) btn-outline-primary @else btn-primary @endif justify-content-center btn-like" data-user="{{Auth::user()->id}}" data-topic="{{$item->id}}"><i class="fa-solid fa-thumbs-up"></i>
+                                    Like</button>
+                                    <a href="{{ url('topic/'. encrypt($item->id)) }}">
+                                        <button class="btn-see-rspn p-2 my-3 justify-content-center">See all response ></button>
+                                    </a>
+                                    <p style="color: #435AE7; font-size: 15px;" class="my-1">15 Answers</p>
                         </div>
     
                         <!-- Modal -->
@@ -220,17 +220,6 @@
 
     }
 
-    .btn-like {
-        text-decoration: none;
-        background-color: #fff;
-        color: #435AE7;
-        border-color: #435AE7;
-        border-radius: 10px;
-        font-size: 15px;
-        "
-
-    }
-
     .btn-see-rspn {
         text-decoration: none;
         background-color: #fff;
@@ -246,6 +235,12 @@
 @endsection
 @section('scripts')
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $(function () {
             $('ul.pagination').hide();
             $('.infinity-scroll').jscroll({
@@ -256,6 +251,31 @@
                 contentSelector: 'div.infinity-scroll',
                 callback: function(){
                     $('ul.pagination').remove();
+                }
+            })
+        });
+        $('.btn-like').click(function(e){
+            e.preventDefault();
+            var button = $(this)
+            var user_id = $(this).data('user');
+            var topic_id = $(this).data('topic');
+            $.ajax({
+                type: "POST",
+                url: "{{ route('likes.store') }}",
+                data: {
+                    user_id: user_id,
+                    topic_id: topic_id,
+                },
+                cache: false,
+                success: function (response) {
+                    if (response.status == 0) {
+                        button.removeClass('btn-primary');
+                        button.addClass('btn-outline-primary');
+                    } else {
+                        button.removeClass('btn-outline-primary');
+                        button.addClass('btn-primary');
+                        
+                    }
                 }
             })
         });

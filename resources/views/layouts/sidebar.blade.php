@@ -28,7 +28,7 @@
     </li>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url('/liked_topics') }}">
+        <a class="nav-link collapsed" href="{{ url('/likes') }}">
             <span class="mx-3">Liked Topics</span>
         </a>
     </li>

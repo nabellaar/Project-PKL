@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Topic extends Model
+class Like extends Model
 {
     use HasFactory;
-    protected $table = 'topics';
+    protected $table = 'likes';
     protected $guarded = [];
 
     public function user() 
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-    public function likes()
+    public function topic() 
     {
-        return $this->hasMany(Like::class, 'topic_id', 'id');
+        return $this->belongsTo(Topic::class, 'topic_id', 'id');
     }
 }
-

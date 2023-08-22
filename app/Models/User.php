@@ -47,7 +47,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function topic() {
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'user_id', 'id');
+    }
+
+    public function topic() 
+    {
         return $this->hasMany(Topic::class, 'user_id', 'id');
     }
 }
