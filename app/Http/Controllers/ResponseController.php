@@ -2,26 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Like;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
-class LikeController extends Controller
+class ResponseController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->ajax()) {
-            $like = Like::where('user_id', Auth::user()->id)
-            ->orderBy('id', 'DESC')
-            ->paginate(5);
-            return view('pages.includes.liked-list', compact('like'));
-        }
-        return view('pages.liked');
+        //
     }
 
     /**
@@ -42,23 +35,19 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        $like = Like::where('user_id', $request->user_id)
-            ->where('topic_id', $request->topic_id)
-            ->first();
-        if ($like) {
-            $like->delete();
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'content'           => ['required', 'min:3']
+        ],
+        [
+            'content.required'  => 'Content Harus Diisi!',
+            'content.min'       => 'Content Minimal :min Karakter!'
+        ]);
+        
+        if ($validator->fails()) {
             return response()->json([
-                'status' => 0,
-                'message' => 'You Unliked this Topic',
-            ]);
-        } else {
-            $like = Like::create([
-                'user_id' => $request->user_id,
-                'topic_id' => $request->topic_id,
-            ]);
-            return response()->json([
-                'status' => 1,
-                'message' => 'You liked this Topic',
+                'status'    => 0,
+                'data'      => $validator->errors()
             ]);
         }
     }

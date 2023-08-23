@@ -19,12 +19,34 @@
     
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <style>
+        .nav-fixed .topnav, #accordionSidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+        }
+        .topnav {
+            padding-left: 0;
+            height: 3.625rem;
+            z-index: 1039;
+            font-size: 0.9rem;
+        }
+        #accordionSidebar, #content .container-fluid {
+            padding-top: 5rem;
+        }
+        #content .container-fluid {
+            padding-left: 16rem;
+        }
+
+    </style>
 
     @yield('styles')
     
 </head>
 
-<body id="page-top">
+<body class="nav-fixed" id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">

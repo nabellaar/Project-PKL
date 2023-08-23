@@ -33,42 +33,47 @@
                             <div class="text-center">
                                 <img src="{{ asset('img/'.$item->image) }}" alt="" class="img-fluid">
                             </div>
-                            <button class="btn-response p-2 justify-content-center my-3" data-toggle="modal"
-                                data-target="#commentModal"><i class="fa-solid fa-share"></i> Add Response</button>
+                            <button class="btn-response btn-outline-primary p-2 justify-content-center my-3" data-topic="{{ $item->id }}"><i class="fa-solid fa-share"></i> 
+                                Add Response</button>
                                 <button class="btn @if (!user_likes(Auth::user()->id, $item->id)) btn-outline-primary @else btn-primary @endif justify-content-center btn-like" data-user="{{Auth::user()->id}}" data-topic="{{$item->id}}"><i class="fa-solid fa-thumbs-up"></i>
-                                    Like</button>
+                                    @if (!user_likes(Auth::user()->id, $item->id)) Like @else Unlike @endif
+                                </button>
                                     <a href="{{ url('topic/'. encrypt($item->id)) }}">
-                                        <button class="btn-see-rspn p-2 my-3 justify-content-center">See all response ></button>
+                                        <button class="btn-see-rspn btn-outline-primary justify-content-center float-right">See all response <i class="fa-solid fa-angle-right"></i></button>
                                     </a>
                                     <p style="color: #435AE7; font-size: 15px;" class="my-1">15 Answers</p>
                         </div>
-    
-                        <!-- Modal -->
-                        <div class="modal fade" id="commentModal" tabindex="-1" role="dialog"
-                            aria-labelledby="commentModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="commentModalLabel" style="color: #000000;">Add Response
-                                        </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <textarea class="form-control" rows="5"
-                                            placeholder="Enter your response"></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
                     </div>
                     @endforeach
+                     <!-- Modal -->
+                     <div class="modal fade" id="commentModal" tabindex="-1" role="dialog"
+                     aria-labelledby="commentModalLabel" aria-hidden="true">
+                     <div class="modal-dialog" role="document">
+                         <div class="modal-content">
+                            <form id="form-add-response" method="post">
+                                @csrf
+                                <input type="hidden" name="topic_id" id="topic_id">
+                                <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="commentModalLabel" style="color: #000000;">Add Response
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea name="content" id="content" class="form-control" rows="5"
+                                        placeholder="Enter your response"></textarea>
+                                    <span id="error-message"></span>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                         </div>
+                     </div>
+                 </div>
                     {{ $topic->appends($_GET)->links() }}
                 </div>
                 
@@ -216,20 +221,20 @@
         border-color: #435AE7;
         border-radius: 10px;
         font-size: 15px;
-        "
 
     }
 
     .btn-see-rspn {
-        text-decoration: none;
-        background-color: #fff;
-        color: #435AE7;
-        border-color: #435AE7;
-        border-radius: 10px;
+        /* text-decoration: none; */
+        background-color: white;
+        /* color: #435AE7;
+        border-color: #435AE7; */
+        border-radius: 5px;
         font-size: 15px;
-        color: #435AE7;
-        margin-left: 51%;
-        margin-top: -17px
+        /* color: #435AE7; */
+        /* margin-right: 20%; */
+        margin-top: 25px; 
+
     }
 </style>
 @endsection
@@ -254,6 +259,7 @@
                 }
             })
         });
+
         $('.btn-like').click(function(e){
             e.preventDefault();
             var button = $(this)
@@ -271,13 +277,37 @@
                     if (response.status == 0) {
                         button.removeClass('btn-primary');
                         button.addClass('btn-outline-primary');
+                        button.html('<i class="fa-solid fa-thumbs-up"></i> Like');
                     } else {
                         button.removeClass('btn-outline-primary');
                         button.addClass('btn-primary');
-                        
+                        button.html('<i class="fa-solid fa-thumbs-up"></i> Unlike');
                     }
                 }
             })
+        });
+
+        $('.btn-response').click(function (e) { 
+            e.preventDefault();
+            var topic_id = $(this).data('topic');
+            $('#topic_id').val(topic_id);
+            $('#commentModal').modal('show');
+        });
+
+        $('#form-add-response').submit(function (e) { 
+            e.preventDefault();
+            var data = new FormData($(this)[0])
+            $.ajax({
+                type: "POST",
+                url: "{{ route('response.store') }}",
+                data: data,
+                contentType: false,
+                processData: false,
+                cache: false,
+                success: function (response) {
+                    
+                }
+            });
         });
     </script>
 @endsection

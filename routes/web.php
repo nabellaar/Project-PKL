@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\TopicController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('topic', TopicController::class);
     Route::get('/search', [DashboardController::class, 'searchTopic'])->name('search.topic');
     Route::resource('/likes', LikeController::class);
+    Route::resource('/response', ResponseController::class);
     
     Route::get('/my_answers', function () {
         // Tambahkan logika untuk menampilkan halaman My Answers di sini

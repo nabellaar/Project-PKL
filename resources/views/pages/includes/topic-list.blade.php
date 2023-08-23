@@ -15,7 +15,7 @@
                 $item->user->full_name }}</span></p>
         <p style="font-size: 12px; margin-left: 30%; margin-top: -33px;">{{ date('d M Y', strtotime($item->updated_at))
             }}</p>
-        <a href="{{ url('topic/'. encrypt($item->id)) }}" style="margin-left: 80%; margin-top: -30px; color: #435AE7; font-size: 15px;">see all
+        <a href="{{ url('topic/'. encrypt($item->id)) }}" class="float-right" style="margin-left: 80%; margin-top: -30px; color: #435AE7; font-size: 15px;">see all
             response ></a>
     </div>
     <div class="card-footer">
@@ -25,7 +25,7 @@
 </div>
 @endforeach
 {{ $topic->appends($_GET)->links() }}
-@section('@style')
+@section('@styles')
 <style>
     .btn-edit {
         border-color: #435AE7;
