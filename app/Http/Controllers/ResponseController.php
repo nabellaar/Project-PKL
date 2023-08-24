@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,9 +13,13 @@ class ResponseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $response = Response::where('topic_id', $request->topic_id)
+            ->where('parent_id', 0)
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
+        return view('pages.includes.response-list', compact('response'));
     }
 
     /**
@@ -50,6 +55,25 @@ class ResponseController extends Controller
                 'data'      => $validator->errors()
             ]);
         }
+
+        $response = Response::create([
+            'user_id'    => $request->user_id,
+            'topic_id'   => $request->topic_id,
+            'content'    => $request->content,
+            'parent_id'    => $request->parent_id,
+        ]);
+
+        $count = Response::where('topic_id', $request->topic_id)
+            ->get()->count();
+        
+        $url = ('topic/'.encrypt($request->topic_id));
+
+        return response()->json([
+            'status'    => 1,
+            'message'   => 'Response Created!',
+            'data'      => $count,
+            'url'       => $url,
+        ]);
     }
 
     /**

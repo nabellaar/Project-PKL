@@ -26,6 +26,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/search', [DashboardController::class, 'searchTopic'])->name('search.topic');
     Route::resource('/likes', LikeController::class);
     Route::resource('/response', ResponseController::class);
+
+    Route::get('test', function () {
+        return view('pages.includes.response-list');
+    });
+    
     
     Route::get('/my_answers', function () {
         // Tambahkan logika untuk menampilkan halaman My Answers di sini

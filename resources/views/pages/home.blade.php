@@ -41,7 +41,7 @@
                                     <a href="{{ url('topic/'. encrypt($item->id)) }}">
                                         <button class="btn-see-rspn btn-outline-primary justify-content-center float-right">See all response <i class="fa-solid fa-angle-right"></i></button>
                                     </a>
-                                    <p style="color: #435AE7; font-size: 15px;" class="my-1">15 Answers</p>
+                                    <p style="color: #435AE7; font-size: 15px;" class="my-1">{{ $item->response->count() }} answer</p>
                         </div>
                     </div>
                     @endforeach
@@ -54,11 +54,12 @@
                                 @csrf
                                 <input type="hidden" name="topic_id" id="topic_id">
                                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="parent_id" id="parent_id" value="0">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="commentModalLabel" style="color: #000000;">Add Response
                                     </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                        <span class="badge badge-danger" aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
@@ -68,12 +69,12 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                          </div>
                      </div>
-                 </div>
+                     </div>
                     {{ $topic->appends($_GET)->links() }}
                 </div>
                 
@@ -305,7 +306,23 @@
                 processData: false,
                 cache: false,
                 success: function (response) {
-                    
+                    if (response.status == 0) {
+                        $.each(response.data, function (i, v) { 
+                             $('#error-message').append(v);
+                        });
+                    } else {
+                        $('#form-add-response').trigger('reset');
+                        $('#commentModal').modal('hide');
+                        Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                     })
+
+                     location.replace(response.url)
+                    }
                 }
             });
         });

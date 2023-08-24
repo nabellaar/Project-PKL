@@ -19,5 +19,10 @@ class Topic extends Model
     {
         return $this->hasMany(Like::class, 'topic_id', 'id');
     }
+    public function response()
+    {
+        return $this->hasMany(Response::class, 'topic_id', 'id');
+    }
+
 }
 

@@ -19,7 +19,7 @@
     
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
-    <style>
+    {{-- <style>
         .nav-fixed .topnav, #accordionSidebar {
             position: fixed;
             top: 0;
@@ -40,6 +40,34 @@
             padding-left: 16rem;
         }
 
+    </style> --}}
+    <style>
+        /* Make the sidebar fixed */
+        #accordionSidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+        }
+
+        /* Adjust the content wrapper to give space for the fixed sidebar */
+        #content-wrapper {
+            margin-left: 225px; /* Adjust this value based on your sidebar width */
+        }
+
+        /* Adjust the top navbar to be fixed */
+        .topbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 225px; /* Adjust this value based on your sidebar width */
+            z-index: 1030; /* To make sure it stays above the sidebar */
+        }
+        #content .container-fluid {
+            padding-top: 5rem;
+        }
+        
     </style>
 
     @yield('styles')
@@ -92,6 +120,42 @@
                         </div>
                     </div>
                 </div>
+                <!-- Modal -->
+                <div class="modal fade" id="addTopic" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel"
+                aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="{{ route('topic.store')}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="commentModalLabel" style="color: #000000;">Create your topic</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="commentTitle" style="color: #435AE7;">Title</label>
+                                    <input type="text" class="form-control" id="commentTitle" name="title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="commentContent" style="color: #435AE7;">Content</label>
+                                    <textarea class="form-control" id="commentContent" name="content" rows="5"
+                                        required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="commentImage" style="color: #435AE7;">Image</label>
+                                    <input type="file" class="form-control" id="commentContent" name="image" accept="image/*">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Bootstrap core JavaScript-->
                 <script src="{{ asset('vendor/jquery/jquery.min.js')}}"></script>
@@ -110,6 +174,7 @@
                 <script src="{{ asset('js/demo/chart-area-demo.js')}}"></script>
                 <script src="{{ asset('js/demo/chart-pie-demo.js')}}"></script>
                 <script src="{{ asset('js/jscroll.min.js')}}"></script>
+                <script src="{{ asset('js/sweetalert2.all.min.js')}}"></script>
                 @yield('scripts')
 </body>
 
