@@ -150,6 +150,46 @@
             });
         });
 
+        function openReply(e, id, username) {
+            e.preventDefault()
+            $('#btnReply'+ id).attr('onclick', "sendReply(event, "+id+",'"+username+"')");
+            $('#collapseExample'+ id).fadeToggle();
+        }
+
+        function sendReply(e, id, username) {
+            e.preventDefault();
+            var data = new FormData($($('#form-add-response'+ id))[0])
+            var usr = '<a href="">@'+username+'&nbsp;</a>'
+            var content = usr+data.get('content')
+            data.append('content', content)
+            $.ajax({
+                type: "POST",
+                url: "{{ route('response.store') }}",
+                data: data,
+                contentType: false,
+                processData: false,
+                cache: false,
+                success: function (response) {
+                    if (response.status == 0) {
+                        $.each(response.data, function (i, v) { 
+                             $('#error-message'+ id).append(v);
+                        });
+                    } else {
+                        $('#form-add-response'+ id).trigger('reset');
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        $('#count-answer').html(response.data + ' answer');
+                        getResponse(url_response)
+                    }
+                }
+            });
+        };
+
 </script>
 
 @endsection

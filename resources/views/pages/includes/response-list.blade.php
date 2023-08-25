@@ -19,42 +19,53 @@
                             </div>
                             <div class="col-4">
                                 <div class="float-right reply">
-                                    <a data-toggle="collapse" href="#collapseExample{{ $item->id }}" role="button" aria-expanded="false" aria-controls="collapseExample" ><span><i class="fa fa-reply"></i> reply</span></a>
+                                    <a href="javascript:void(0)" onclick="openReply(event, {{ $item->id }}, '{{ $item->user->username }}')">
+                                        <span><i class="fa fa-reply"></i> reply</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         {{ $item->content }}
-                        @foreach ( $item->children() as $children )
+                        @foreach ( $item->children()->get() as $children )
                         <div class="media my-4">
                             <a class="pr-3" href="#"><img class="rounded-circle" alt=""
                                 src="{{ $children->user->photo ? asset('img/profile/'.$children->user->photo) : asset('img/profile/default.jpg') }}" /></a>
                             <div class="media-body">
                                 <div class="row">
-                                    <div class="col-12 d-flex">
+                                    <div class="col-8 d-flex">
                                         <h5>{{ $children->user->full_name }}&nbsp;</h5>
                                         <span> - {{ date('d F Y H:i:s', strtotime($children->created_at)) }}</span>
                                     </div>
+                                    <div class="col-4">
+                                        <div class="float-right reply">
+                                            <a href="javascript:void(0)" onclick="openReply(event, {{ $item->id }}, '{{ $children->user->username }}')">
+                                                <span><i class="fa fa-reply"></i> reply</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                                {{ $children->content }}
+                                
+                                {!! $children->content !!}
                             </div>
                         </div> 
                         @endforeach
                         <div class="collapse" id="collapseExample{{ $item->id }}">
-                            <form id="form-add-response" method="post">
+                            <form id="form-add-response{{ $item->id }}" method="post">
                                 @csrf
-                                <input type="hidden" name="topic_id" id="topic_id">
+                                <input type="hidden" name="topic_id" id="topic_id" value="{{ $item->topic_id }}">
                                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
-                                <input type="hidden" name="parent_id" id="parent_id" value="0">
+                                <input type="hidden" name="parent_id" id="parent_id" value="{{ $item->id }}">
                                 <div class="modal-body">
                                     <textarea name="content" id="content" class="form-control" rows="5"
                                         placeholder="Enter your response"></textarea>
-                                    <span id="error-message"></span>
+                                    <span id="error-message{{ $item->id }}"></span>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-primary" id="btnReply{{ $item->id }}" onclick="sendReply(event, {{ $item->id }})">Submit</button>
                                 </div>
                             </form>
-                          </div>
+                        </div>
+                        
                     </div>
                 </div>
                 <hr>
