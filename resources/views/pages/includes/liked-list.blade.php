@@ -7,7 +7,7 @@
                 src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) :asset('img/profile/default.jpg') }}"
                 alt="">
             <h5 style="margin-left: 70px; color:#000; margin-top: -50px; font-size: 17px;">
-                {{ $item->user->full_name }}</h5>
+                {{ $item->user->username }}</h5>
             <p style="margin-left: 70px; font-size: 13px;">{{ date('d M Y',
                 strtotime($item->topic->updated_at)) }}</p>
             {{-- <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"

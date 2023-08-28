@@ -21,8 +21,8 @@
         </a>
     </li>
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item @if (Request::segment(1) == 'my_answer') active @endif">
-        <a class="nav-link collapsed" href="{{ url('/my_answers') }}">
+    <li class="nav-item @if (Request::segment(1) == 'answer') active @endif">
+        <a class="nav-link collapsed" href="{{ url('/answer') }}">
             <span class="mx-3">My Answers</span>
         </a>
     </li>

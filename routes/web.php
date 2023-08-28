@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\LoginController;
@@ -26,9 +27,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/search', [DashboardController::class, 'searchTopic'])->name('search.topic');
     Route::resource('/likes', LikeController::class);
     Route::resource('/response', ResponseController::class);
+    Route::resource('/answer', AnswerController::class);
 
-    Route::get('test', function () {
-        return view('pages.includes.response-list');
+    Route::get('admin', function () {
+        return view('admin');
     });
     
     

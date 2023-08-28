@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,7 +13,17 @@ class DashboardController extends Controller
     {
         $topic = Topic::orderBy('id', 'DESC')->paginate(5);
         $likes = new Like();
-        return view('pages.home', compact('topic', 'likes'));
+        $trending = Topic::withCount('likes')
+            ->having('likes_count', '!=', 0)
+            ->orderByDESC('likes_count')
+            ->limit(5)    
+            ->get();
+        $top_user = User::withCount('topic')
+            ->having('topic_count', '!=', 0)
+            ->orderByDESC('topic_count')
+            ->limit(4)    
+            ->get();
+        return view('pages.home', compact('topic', 'likes', 'trending', 'top_user'));
     }
 
     public function searchTopic(Request $request)

@@ -12,7 +12,7 @@
             src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) : asset('img/profile/default.jpg') }}"
             alt="">
         <p style="font-size: 12px; margin-left: 35px; margin-top: -23px;">Posted by <span style="color: #435AE7;">{{
-                $item->user->full_name }}</span></p>
+                $item->user->username }}</span></p>
         <p style="font-size: 12px; margin-left: 30%; margin-top: -33px;">{{ date('d M Y', strtotime($item->updated_at))
             }}</p>
         <a href="{{ url('topic/'. encrypt($item->id)) }}" class="float-right" style="margin-left: 80%; margin-top: -30px; color: #435AE7; font-size: 15px;">see all
