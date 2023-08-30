@@ -16,6 +16,8 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -71,7 +73,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ url('/dashboardAdmin') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -89,8 +91,9 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">From User :</h6>
-                        <a class="collapse-item" href="buttons.html">Topic</a>
-                        <a class="collapse-item" href="cards.html">Comment</a>
+                        <a class="collapse-item" href="/userAdmin">User</a>
+                        <a class="collapse-item" href="/topicAdmin">Topic</a>
+                        <a class="collapse-item" href="/commentAdmin">Comment</a>
                     </div>
                 </div>
             </li>
@@ -320,35 +323,25 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Username</th>
+                                            <th>Full Name</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>No Handphone</th>
+                                            <th>Created at</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <tr>
                                             <td>Tiger Nixon</td>
@@ -817,16 +810,6 @@
 
             </div>
             <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->

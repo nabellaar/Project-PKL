@@ -98,7 +98,7 @@
                     <div class="card-body">
                         @foreach ($trending as $trend )
                         <img style="height: 50px;" class="rounded-circle" src="{{ $trend->user->foto ? asset('img/profile/'.$trend->user->foto) : asset('img/profile/default.jpg') }}" alt="">
-                        <p class="user-trending">{{$trend->user->full_name}}</p>
+                        <p class="user-trending">{{$trend->user->username}}</p>
                         <p class="time-trending">{{ date('d M Y', strtotime($trend->updated_at))}}</p>
                         <p class="content-trending">{{$trend->content}}</p>
                             {{$trend->likes_count}} likes
@@ -122,8 +122,8 @@
                     <div class="card-body">
                         @foreach ($top_user as $top)
                         <img style="height: 45px; margin-bottom: 10px;" class="rounded-circle" src="{{ $top->foto ? asset('img/profile/'.$top->user->foto) : asset('img/profile/default.jpg') }}" alt="">
-                        <p class="top-user">{{$top->full_name}}</p>
-                        <p class="user-post">{{$top->topic_count}}</p>
+                        <p class="top-user">{{$top->username}}</p>
+                        <p class="user-post">{{$top->topic_count}} Topic</p>
                         <hr style="margin-top: 30px;">
                         @endforeach
                     </div>

@@ -1,0 +1,48 @@
+.user-total {
+    color: black;
+    margin-left: 110px;
+}
+.count-user {
+    color: #435AE7;
+    font-size: 40px;
+    margin-left: 110px;
+}
+.total-topic {
+    color: black;
+    margin-left: 7rem;
+    margin-top: 3rem;
+}
+.count-topic {
+    color: #435AE7;
+    font-size: 40px;
+    margin-left: 7rem;
+}
+.user-admin {
+    color: black;
+    margin-left: 4rem;
+    margin-top: -2.7rem;
+
+}
+.date-trending {
+    font-size: 12px;
+    margin-left: 4rem;
+    margin-top: -1rem;
+}
+.content-admin {
+    color: black;
+    font-size: 15px;
+}
+.top-user-admin {
+    color: black;
+    margin-left: 4rem;
+    margin-top: -2.5rem
+}
+.top-count-admin {
+    color: #435AE7;
+    font-size: 10px;
+    margin-top: -2.3rem;
+    margin-left: 17rem;
+}
+.hr-top-admin {
+    margin-top: 40px;
+}

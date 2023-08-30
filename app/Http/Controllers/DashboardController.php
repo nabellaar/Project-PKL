@@ -21,7 +21,7 @@ class DashboardController extends Controller
         $top_user = User::withCount('topic')
             ->having('topic_count', '!=', 0)
             ->orderByDESC('topic_count')
-            ->limit(4)    
+            ->limit(5)    
             ->get();
         return view('pages.home', compact('topic', 'likes', 'trending', 'top_user'));
     }

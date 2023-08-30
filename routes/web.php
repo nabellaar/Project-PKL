@@ -29,10 +29,25 @@ Route::middleware('auth')->group(function () {
     Route::resource('/response', ResponseController::class);
     Route::resource('/answer', AnswerController::class);
 
-    Route::get('admin', function () {
+    Route::get('/admin', function () {
         return view('admin');
     });
-    
+
+    Route::get('/dashboardAdmin', function () {
+        return view('dashboardAdmin');
+    });
+
+    Route::get('/userAdmin', function () {
+        return view('userAdmin');
+    });
+
+    Route::get('/topicAdmin', function () {
+        return view('topicAdmin');
+    });
+
+    Route::get('/commentAdmin', function () {
+        return view('commentAdmin');
+    });
     
     Route::get('/my_answers', function () {
         // Tambahkan logika untuk menampilkan halaman My Answers di sini

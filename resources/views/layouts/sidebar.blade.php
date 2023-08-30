@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
         <div class="sidebar-brand-text mx-3">Forume</div>
     </a>
     <!-- Divider -->
@@ -11,31 +11,31 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item @if (Request::segment(1) == '') active @endif">
         <a class="nav-link collapsed" href="{{ url('/') }}">
-            <span class="mx-3">Home</span>
+            <span class="mx-3"><i class="fa-solid fa-house"></i> Home</span>
         </a>
     </li>
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item @if (Request::segment(1) == 'topic') active @endif">
         <a class="nav-link collapsed" href="{{ url('/topic') }}">
-            <span class="mx-3">My Topics</span>
+            <span class="mx-3"><i class="fa-solid fa-book"></i> My Topics</span>
         </a>
     </li>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item @if (Request::segment(1) == 'answer') active @endif">
         <a class="nav-link collapsed" href="{{ url('/answer') }}">
-            <span class="mx-3">My Answers</span>
+            <span class="mx-3"><i class="fa-solid fa-pen"></i> My Answers</span>
         </a>
     </li>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item @if (Request::segment(1) == 'likes') active @endif">
         <a class="nav-link collapsed" href="{{ url('/likes') }}">
-            <span class="mx-3">Liked Topics</span>
+            <span class="mx-3"><i class="fa-solid fa-thumbs-up"></i> Liked Topics</span>
         </a>
     </li>
     <!-- Button to trigger the modal -->
     <button type="button" class="btn btn-primary p-2 justify-content-center mx-4 my-3" data-toggle="modal"
         data-target="#addTopic" style="border-color: #435AE7; background-color: #fff; color: #435AE7;">
-        + Create a New Topic
+        <i class="fa-solid fa-plus"></i> Create a New Topic
     </button>
     
 </ul>
