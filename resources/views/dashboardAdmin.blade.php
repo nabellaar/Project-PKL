@@ -74,34 +74,13 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/dashboardAdmin') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>User</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">From User :</h6>
-                        <a class="collapse-item" href="/userAdmin">User</a>
-                        <a class="collapse-item" href="/topicAdmin">Topic</a>
-                        <a class="collapse-item" href="/commentAdmin">Comment</a>
-                    </div>
-                </div>
-            </li>
+            
 
         </ul>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex flex-column min-vh-100">
 
             <!-- Main Content -->
             <div id="content">
@@ -308,60 +287,7 @@
                 </nav>
                 <!-- End of Topbar -->
                 <!-- Pie Chart -->
-                <div class="row pt-5 mx-4">
-                    <div class="col-xl-4 col-lg-5 pt-5">
-                        <div class="card">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">User</h6>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-pie pt-4 pb-2">
-                                    <h5 class="user-total">Total User</h5>
-                                    <p class="count-user"><i class="fa-solid fa-user"></i> 5</p>
-
-                                    <h5 class="total-topic">Total Topic</h5>
-                                    <p class="count-topic"><i class="fa-solid fa-book"></i> 10</p>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-5 pt-5">
-                        <div class="card">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Trending Topic</h6>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <img style="height: 50px;" class="rounded-circle" src="img/profile/default.jpg" alt="">
-                                <p class="user-admin">Nabella</p>
-                                <p class="date-trending">30min ago</p>
-                                <p class="content-admin">Apa itu html</p>
-                                <hr>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-5 pt-5">
-                        <div class="card">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Top User</h6>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <img style="height: 50px;" class="rounded-circle" src="img/profile/default.jpg" alt="">
-                                <p class="top-user-admin">Nabella</p>
-                                <p class="top-count-admin">7 Topic</p>
-                                <hr class="hr-top-admin">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>

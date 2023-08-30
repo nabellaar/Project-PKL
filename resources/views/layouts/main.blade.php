@@ -54,6 +54,7 @@
         /* Adjust the content wrapper to give space for the fixed sidebar */
         #content-wrapper {
             margin-left: 225px; /* Adjust this value based on your sidebar width */
+            height: 100vh;
         }
 
         /* Adjust the top navbar to be fixed */
@@ -64,7 +65,7 @@
             left: 225px; /* Adjust this value based on your sidebar width */
             z-index: 1030; /* To make sure it stays above the sidebar */
         }
-        #content .container-fluid {
+        #content .p-alert {
             padding-top: 5rem;
         }
         

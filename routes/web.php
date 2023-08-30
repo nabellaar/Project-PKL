@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AnswerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -9,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\TopicController;
+use App\Http\Middleware\AdminMiddleware;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -28,6 +31,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('/likes', LikeController::class);
     Route::resource('/response', ResponseController::class);
     Route::resource('/answer', AnswerController::class);
+
+    Route::prefix('/admin')->name('admin.')->middleware(AdminMiddleware::class)->group(function() {
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::resource('/user', UserController::class);
+    });
+
 
     Route::get('/admin', function () {
         return view('admin');

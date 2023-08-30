@@ -8,6 +8,33 @@
     <hr class="sidebar-divider my-0">
     <!-- Divider -->
     <hr class="sidebar-divider">
+    {{-- sidebar admin --}}
+    @if (Auth::user()->role == 'admin')
+    <li class="nav-item @if (Request::segment(2) == '' || Request::segment(2) == 'dashboard') active @endif">
+        <a class="nav-link" href="{{ url('/admin/dashboard') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+            aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Menu</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">From User :</h6>
+                <a class="collapse-item" href="{{ url('admin/user')}}">User</a>
+                <a class="collapse-item" href="/topicAdmin">Topic</a>
+                <a class="collapse-item" href="/commentAdmin">Comment</a>
+            </div>
+        </div>
+    </li>
+    {{-- end sidebar admin --}}
+    @else
+
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item @if (Request::segment(1) == '') active @endif">
         <a class="nav-link collapsed" href="{{ url('/') }}">
@@ -37,6 +64,9 @@
         data-target="#addTopic" style="border-color: #435AE7; background-color: #fff; color: #435AE7;">
         <i class="fa-solid fa-plus"></i> Create a New Topic
     </button>
-    
+    @endif
+
+
+
 </ul>
 <!-- End of Sidebar -->
