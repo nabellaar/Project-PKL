@@ -77,7 +77,7 @@
                     } else {
                         $('#exampleModal').modal('hide');
                         $('#form-edit-topic').trigger('reset');
-                        $(".success-msg").html(response.message).show();
+                        $(".alert-show").html(response.message).show();
                         getTopic(url)
                     }
 
@@ -96,7 +96,7 @@
                         'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (response) {
-                        $(".success-msg").html(response.message).show();
+                        $(".alert-show").html(response.message).show();
                         getTopic(url)
                     }
                 });

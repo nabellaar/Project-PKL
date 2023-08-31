@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,11 +16,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = User::where('role', 'user')->orderBy('full_name');
-        $user = $user->paginate(10);
-        return view('pages.admin.user.index', compact('user'));
+        if ($request->ajax()) {
+            $user = User::where('role', 'user')->orderBy('full_name');
+            if ($request->search) {
+                $user = $user->where('username', 'like', '%'.$request->search.'%')
+                        ->orWhere('full_name', 'like', '%'.$request->search.'%')
+                        ->orWhere('email', 'like', '%'.$request->search.'%');
+            }
+            $user = $user->paginate(10);
+            return view('pages.admin.includes.user-list', compact('user'));
+        }
+        return view('pages.admin.user.index');
     }
 
     /**
@@ -83,7 +92,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('pages.admin.user.edit', compact('user'));
     }
 
     /**
@@ -95,7 +105,34 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $user = User::find($id);
+        $validator = Validator::make($data, [
+            'full_name'           => ['required', 'min:5'],
+            'username'           => ['required', 'min:2', 'unique:users,username,'.$user->id],
+            'email'           => ['required', 'email', 'unique:users,email,'.$user->id],
+            'password'           => ['nullable','min:6', 'string'],
+            'no_handphone'           => ['required', 'min:9', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'max:14'],
+            'role'           => ['required'],
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
+        if ($request->password) {
+            $data['password'] = Hash::make($request->password);
+        } else {
+            # code...
+            $data['password'] = $user->password;
+        }
+        
+        $user->update($data);
+        if ($user) {
+            return redirect()->route('admin.user.index')->with('success', 'Data Has Been Updated');
+        } else {
+            return redirect()->back()->with('error', 'Data Error');
+        }
     }
 
     /**
@@ -106,6 +143,22 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $topic = Topic::where('user_id', $user->id)->count();
+        if ($topic > 0) {
+            return response()->json([
+                'status'    => false,
+            ]);
+        } else {
+            $path = 'img/profile/'.$user->foto;
+            if (is_file($path)) {
+                unlink($path);
+            }
+            $user->delete();
+            return response()->json([
+                'status'    => true,
+            ]);
+        }
+        
     }
 }
