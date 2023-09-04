@@ -19,6 +19,7 @@
     
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css')}}">
     <link rel="stylesheet" href=" {{ asset('css/custom.css')}} ">
     {{-- <style>
         .nav-fixed .topnav, #accordionSidebar {
@@ -45,7 +46,7 @@
     <style>
         /* Make the sidebar fixed */
         #accordionSidebar {
-            position: fixed;
+            position: fixed ;
             top: 0;
             left: 0;
             bottom: 0;
@@ -76,7 +77,7 @@
     
 </head>
 
-<body class="nav-fixed" id="page-top">
+<body  id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">

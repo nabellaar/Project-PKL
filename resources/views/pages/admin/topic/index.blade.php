@@ -3,23 +3,23 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Topic</h6>
         </div>
         <div class="card-body">
-            <a class="btn btn-outline-primary mb-3" href="{{ route('admin.user.create')}}"><i class="fa-solid fa-plus"></i>&nbsp; Create</a>
+            <a class="btn btn-outline-primary mb-3" href="{{ route('admin.topic.create')}}"><i class="fa-solid fa-plus"></i>&nbsp; Create Topic</a>
             <form
                 class="d-none d-sm-inline-block float-right form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
                 method="GET">
                 <div class="input-group">
-                    <input name="keyword" type="text" id="search-user" class="form-control bg-light border-0 small" autofocus
-                        placeholder="Search for User" aria-label="Search" aria-describedby="basic-addon2">
+                    <input name="keyword" id="search-topic" type="text" id="search-user" class="form-control bg-light border-0 small" autofocus
+                        placeholder="Search for Topic" aria-label="Search" aria-describedby="basic-addon2">
                 </div>
             </form>
             <div class="col-12 text-center" id="load-icon" style="display: none">
                 <img width="50px" src="{{ asset('img/loading.gif')}}" alt="">
             </div>
-            <div class="table-responsive" id="content-user">
-                
+            <div class="table-responsive" id="content-topic">
+               
             </div>
         </div>
     </div>
@@ -27,16 +27,16 @@
 @endsection
 @section('scripts')
 <script>
-    var url = "{{ route('admin.user.index') }}"
-    getUser(url)
+    var url = "{{ route('admin.topic.index') }}"
+    getTopic(url)
 
-    $('#search-user').keyup(function (e) { 
+    $('#search-topic').keyup(function (e) { 
         e.preventDefault()
         var search = $(this).val();
-        getUser(url + '?search=' + search)
+        getTopic(url + '?search=' + search)
     });
 
-    function getUser(url) {
+    function getTopic(url) {
         $.ajax({
             type: "GET",
             url: url,
@@ -46,17 +46,17 @@
             },
             success: function (response) {
                 $('#load-icon').hide();  
-                $('#content-user').html(response); 
+                $('#content-topic').html(response); 
                 $('ul.pagination a').click(function (e) { 
                 e.preventDefault();
                 var href = $(this).attr('href');
-                getUser(href)
+                getTopic(href)
                 });
             }
         });
     }
 
-    function deleteUser(e, id) {
+    function deleteTopic(e, id) {
         e.preventDefault()
         const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -78,7 +78,7 @@
         if (result.isConfirmed) {
             $.ajax({
                 type: "DELETE",
-                url: "{{ url('admin/user') }}/"+id,
+                url: "{{ url('admin/topic') }}/"+id,
                 cache: false,
                 headers: {
                     'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
