@@ -6,12 +6,12 @@
             <h6 class="m-0 font-weight-bold text-primary">Data Topic</h6>
         </div>
         <div class="card-body">
-            <a class="btn btn-outline-primary mb-3" href="{{ route('admin.topic.create')}}"><i class="fa-solid fa-plus"></i>&nbsp; Create Topic</a>
+            <a class="btn btn-outline-primary mb-3 btn-sm" href="{{ route('admin.topic.create')}}"><i class="fa-solid fa-plus"></i>&nbsp; Create Topic</a>
             <form
                 class="d-none d-sm-inline-block float-right form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
                 method="GET">
                 <div class="input-group">
-                    <input name="keyword" id="search-topic" type="text" id="search-user" class="form-control bg-light border-0 small" autofocus
+                    <input name="keyword" id="search-topic" type="text" class="form-control bg-light border-0 small" autofocus
                         placeholder="Search for Topic" aria-label="Search" aria-describedby="basic-addon2">
                 </div>
             </form>
@@ -97,7 +97,7 @@
                         'error'
                         )
                     }
-                    getUser(url)
+                    getTopic(url)
                 }
             });
         } else if (

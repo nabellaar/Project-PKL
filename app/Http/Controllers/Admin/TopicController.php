@@ -111,7 +111,8 @@ class TopicController extends Controller
      */
     public function edit($id)
     {
-        //
+        $topic = Topic::find($id);
+        return view('pages.admin.topic.edit', compact('topic'));
     }
 
     /**
@@ -123,7 +124,20 @@ class TopicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $topic = Topic::find($id);
+        $validator = Validator::make($data, [
+            'title'     => ['required', 'string', 'min:3', 'max:255'], 
+            'content'   => ['required', 'min:3'],
+            'image'     => ['image', 'max:2048'],
+        ]);
+
+        $topic->update($data);
+        if ($topic) {
+            return redirect()->route('admin.topic.index')->with('success', 'Data Has Been Updated');
+        } else {
+            return redirect()->back()->with('error', 'Data Error');
+        }
     }
 
     /**
@@ -134,6 +148,10 @@ class TopicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $topic = Topic::find($id);
+        $topic->delete();
+            return response()->json([
+                'status'    => true,
+            ]);
     }
 }
