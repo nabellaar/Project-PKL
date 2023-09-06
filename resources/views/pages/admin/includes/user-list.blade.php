@@ -1,4 +1,4 @@
-<table class="table datatable-table" width="100%" cellspacing="0">
+<table class="table datatable-table mt-4" width="100%" cellspacing="0">
     <thead>
         <tr>
             <th>No</th>

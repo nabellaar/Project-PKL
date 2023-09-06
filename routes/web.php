@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ResponseController as AdminResponseController;
 use App\Http\Controllers\Admin\TopicController as AdminTopicController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AnswerController;
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::resource('/user', UserController::class);
         Route::resource('/topic', AdminTopicController::class);
+        Route::resource('/response', AdminResponseController::class);
     });
 
 

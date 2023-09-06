@@ -1,4 +1,4 @@
-<table class="table datatable-table" id="dataTable" width="100%" cellspacing="0">
+<table class="table datatable-table mt-4" id="dataTable" width="100%" cellspacing="0">
     <thead>
         <tr>
             <th>No</th>
@@ -32,10 +32,10 @@
             <td>
                 <button class="btn btn-outline-blue btn-sm m-2"><i class="fa-solid fa-check"></i>&nbsp; Accept</button>
                 <button class="btn btn-outline-orange btn-sm m-2"><i class="fa-solid fa-xmark"></i>&nbsp; Decline</button>
-                <button class="btn btn-outline-info btn-sm m-2"><i class="fa-regular fa-eye"></i>&nbsp; View</button>
+                <a class="btn btn-outline-info btn-sm m-2" href="{{ route('admin.topic.show', $item->id)}}"><i class="fa-regular fa-eye"></i>&nbsp; View</a>
 
                 <a class="btn btn-outline-success btn-sm m-2" href="{{ route('admin.topic.edit', $item->id)}}"><i class="fa-regular fa-pen-to-square"></i>&nbsp; Edit</a>
-                <button class="btn btn-outline-danger btn-sm m-2"><i class="fa-solid fa-trash-can" onclick="deleteTopic(event, {{$item->id}}, '{{$item->title}}')"></i>&nbsp; Delete</button>
+                <button class="btn btn-outline-danger btn-sm m-2" onclick="deleteTopic(event, {{$item->id}}, '{{$item->title}}')"><i class="fa-solid fa-trash-can"></i>&nbsp; Delete</button>
             </td>
         </tr>
         @endforeach

@@ -1,4 +1,3 @@
-
     <div class="card">
         <div class="row">
             <div class="col-12">
@@ -15,12 +14,15 @@
                                     </b>
                                 </h5>
                                     
-                                <span> - {{ date('d F Y H:i:s', strtotime($item->created_at)) }}</span>
+                                <span> &nbsp; {{ \Carbon\Carbon::parse($item->created_at)->diffForHumans(['short'=>true]) }} </span>
                             </div>
                             <div class="col-4">
                                 <div class="float-right reply">
                                     <a href="javascript:void(0)" onclick="openReply(event, {{ $item->id }}, '{{ $item->user->username }}')">
                                         <span><i class="fa fa-reply"></i> reply</span>
+                                    </a>
+                                    <a class="ml-4" href="javascript:void(0)" onclick="openReport(event, {{ $item->id }}, '{{ $item->user->username }}')">
+                                        <span><i class="fa-solid fa-flag"></i> report</span>
                                     </a>
                                 </div>
                             </div>
@@ -34,12 +36,15 @@
                                 <div class="row">
                                     <div class="col-8 d-flex">
                                         <h5>{{ $children->user->full_name }}&nbsp;</h5>
-                                        <span> - {{ date('d F Y H:i:s', strtotime($children->created_at)) }}</span>
+                                        <span> &nbsp; {{ \Carbon\Carbon::parse($children->created_at)->diffForHumans(['short'=>true]) }}</span>
                                     </div>
                                     <div class="col-4">
                                         <div class="float-right reply">
                                             <a href="javascript:void(0)" onclick="openReply(event, {{ $item->id }}, '{{ $children->user->username }}')">
                                                 <span><i class="fa fa-reply"></i> reply</span>
+                                            </a>
+                                            <a class="ml-4" href="javascript:void(0)" onclick="openReport(event, {{ $item->id }}, '{{ $item->user->username }}')">
+                                                <span><i class="fa-solid fa-flag"></i> report</span>
                                             </a>
                                         </div>
                                     </div>

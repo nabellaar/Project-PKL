@@ -65,6 +65,36 @@
                          </div>
                      </div>
                      </div>
+
+                     <!-- Modal Report -->
+                     <div class="modal fade" id="reportModal" tabindex="-1" role="dialog"
+                     aria-labelledby="commentModalLabel" aria-hidden="true">
+                     <div class="modal-dialog" role="document">
+                         <div class="modal-content">
+                            <form id="form-add-response" method="post">
+                                @csrf
+                                <input type="hidden" name="topic_id" id="topic_id">
+                                <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="parent_id" id="parent_id" value="0">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="commentModalLabel" style="color: #000000;">Report
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span class="badge badge-danger" aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="">
+                                    <label class="form-check-label" for="flexCheckDefault">Spam</label>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                         </div>
+                     </div>
+                     </div>
                 </div>
             </div>
         </div>
@@ -154,6 +184,11 @@
             e.preventDefault()
             $('#btnReply'+ id).attr('onclick', "sendReply(event, "+id+",'"+username+"')");
             $('#collapseExample'+ id).fadeToggle();
+        }
+
+        function openReport(e, id, username) {
+            e.preventDefault()
+            
         }
 
         function sendReply(e, id, username) {

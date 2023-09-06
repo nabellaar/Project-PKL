@@ -11,16 +11,19 @@
                 @method('PUT')
                 <div class="form-group">
                     <label for="commentTitle" style="color: #435AE7;">Title</label>
-                    <input type="text" class="form-control" id="commentTitle" name="title" required>
+                    <input type="text" class="form-control" id="commentTitle" name="title" required value="{{$topic->title}}">
                 </div>
                 <div class="form-group">
                     <label for="commentContent" style="color: #435AE7;">Content</label>
                     <textarea class="form-control" id="commentContent" name="content" rows="5"
-                        required></textarea>
+                        required>{{$topic->content}}</textarea>
+                </div>
+                <div class="">
+                    <img src="{{ asset('img/'.$topic->image) }}" alt="" width="300px">
                 </div>
                 <div class="form-group">
                     <label for="commentImage" style="color: #435AE7;">Image</label>
-                    <input type="file" class="form-control" id="commentContent" name="image" accept="image/*">
+                    <input type="file" class="form-control" id="commentContent" name="image" accept="image/*" >
                 </div>
                 <a href="{{ route('admin.topic.index') }}" class="btn btn-outline-primary">Cancel</a>
                 <button type="submit" class="btn btn-outline-primary">Save</button>

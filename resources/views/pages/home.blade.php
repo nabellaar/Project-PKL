@@ -30,8 +30,8 @@
                         <div class="card-body">
                             <h5 class="user-title">{{ $item->title }}</h5>
                             <p class="user-content">{{ $item->content }}</p>
-                            <div class="text-center">
-                                <img src="{{ asset('img/'.$item->image) }}" alt="" class="img-fluid">
+                            <div class="">
+                                <img src="{{ asset('img/'.$item->image) }}" alt="" width="300px">
                             </div>
                             <button class="btn-response btn-outline-primary p-2 justify-content-center my-3" data-topic="{{ $item->id }}"><i class="fa-solid fa-share"></i> 
                                 Add Response</button>

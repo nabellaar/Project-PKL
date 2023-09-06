@@ -100,7 +100,8 @@ class TopicController extends Controller
      */
     public function show($id)
     {
-        //
+        $topic = Topic::find($id);
+        return view('pages.admin.topic.view', compact('topic'));
     }
 
     /**
@@ -133,6 +134,15 @@ class TopicController extends Controller
         ]);
 
         $topic->update($data);
+
+        if ($request->hasFile('image')){
+            $file = $request->file('image');
+            $ext  = $file->getClientOriginalExtension();
+            $newName = Str::slug($request->title).'-'.md5(uniqid(rand(), true)).$ext;
+            $file->move(public_path('img/'), $newName);
+            $topic->image = $newName;
+            $topic->save();
+        }
         if ($topic) {
             return redirect()->route('admin.topic.index')->with('success', 'Data Has Been Updated');
         } else {
@@ -149,9 +159,14 @@ class TopicController extends Controller
     public function destroy($id)
     {
         $topic = Topic::find($id);
+        $path = 'img/'.$topic->image;
+            if (is_file($path)) {
+                unlink($path);
+            }
         $topic->delete();
             return response()->json([
                 'status'    => true,
             ]);
+        
     }
 }

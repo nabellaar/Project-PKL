@@ -28,7 +28,7 @@
                 <h6 class="collapse-header">From User :</h6>
                 <a class="collapse-item" href="{{ url('admin/user')}}">User</a>
                 <a class="collapse-item" href="{{ url('admin/topic')}}">Topic</a>
-                <a class="collapse-item" href="/commentAdmin">Comment</a>
+                <a class="collapse-item" href="{{ url('admin/response')}}">Response</a>
             </div>
         </div>
     </li>
