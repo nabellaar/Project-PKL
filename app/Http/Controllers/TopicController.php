@@ -67,7 +67,7 @@ class TopicController extends Controller
             'content'   => $request->content,
             'slug'      => Str::slug($request->title),
             'user_id'   => Auth::user()->id,
-            'status'    => 1
+            'status'    => 3
         ]);
 
         if ($request->hasFile('image')){

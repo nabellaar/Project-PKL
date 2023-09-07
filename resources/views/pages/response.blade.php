@@ -71,21 +71,34 @@
                      aria-labelledby="commentModalLabel" aria-hidden="true">
                      <div class="modal-dialog" role="document">
                          <div class="modal-content">
-                            <form id="form-add-response" method="post">
+                            <form id="form-report" method="post">
                                 @csrf
-                                <input type="hidden" name="topic_id" id="topic_id">
+                                <input type="hidden" name="response_id" id="response_id">
                                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
-                                <input type="hidden" name="parent_id" id="parent_id" value="0">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="commentModalLabel" style="color: #000000;">Report
+                                    <h5 class="modal-title" id="reportModalLabel" style="color: #000000;">Report
                                     </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span class="badge badge-danger" aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="">
-                                    <label class="form-check-label" for="flexCheckDefault">Spam</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="reason1" type="radio" name="reason" value="Spam">
+                                        <label class="form-check-label" for="reason1">Spam</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="reason2" type="radio" name="reason" value="Hate commment">
+                                        <label class="form-check-label" for="reason2">Hate commment</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="reason3" type="radio" name="reason" value="Misinformation">
+                                        <label class="form-check-label" for="reason3">Misinformation</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="reason3" type="radio" name="reason" value="Bullying">
+                                        <label class="form-check-label" for="reason3">Bullying</label>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -188,8 +201,35 @@
 
         function openReport(e, id, username) {
             e.preventDefault()
-            
+            $('#response_id').val(id);
+            $('#reportModalLabel').html('Report '+ username);
+            $('#reportModal').modal('show');
+
         }
+
+        $('#form-report').submit(function (e) { 
+            e.preventDefault();
+            var data = new FormData($($('#form-report'))[0])
+            $.ajax({
+                type: "POST",
+                url: "{{ route('report.store')}}",
+                data: data,
+                contentType: false,
+                processData: false,
+                cache: false,
+                success: function (response) {
+                    $('#form-report').trigger('reset');
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    $('#reportModal').modal('hide');
+                }
+            });
+        }); 
 
         function sendReply(e, id, username) {
             e.preventDefault();

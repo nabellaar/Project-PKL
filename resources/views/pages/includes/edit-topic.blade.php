@@ -22,6 +22,7 @@
                     <textarea class="form-control" id="commentContent" name="content" rows="5"
                         required>{{ $topic->content }}</textarea>
                 </div>
+                @if ($topic->status != 3)
                 <div class="form-group">
                     <label for="commentContent" style="color: #435AE7;">Status</label>
                     <div class="form-check">
@@ -33,6 +34,7 @@
                         <label class="form-check-label" for="flexRadioDefault2">Draft</label>
                     </div>
                 </div>
+                @endif
                 <div class="form-group">
                     <label for="commentImage" style="color: #435AE7;">Image</label>
                     <input type="file" class="form-control" id="commentContent" name="image" accept="image/*">

@@ -3,7 +3,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Content Row -->
-    <div class="row">
+    <div class="row mx-3">
         <!-- TopicHome -->
         <div class="col-xl-8 col-lg-7">
             <div class="col-12 text-center" id="load-icon" style="display: none">

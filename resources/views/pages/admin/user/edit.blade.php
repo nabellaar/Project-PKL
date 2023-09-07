@@ -43,7 +43,7 @@
                     <label for="password">Password</label>
                     <input class="form-control @error('password') is-invalid @enderror" id="password" type="text"
                         placeholder="Password" name="password">
-                        <span>*please empty</span>
+                        <span>*please empty the password if you don't want to change it</span>
                     @error('password')
                     <div class="invalid-feedback">
                         {{ $message }}

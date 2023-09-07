@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\ResponseController as AdminResponseController;
 use App\Http\Controllers\Admin\TopicController as AdminTopicController;
 use App\Http\Controllers\Admin\UserController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\TopicController;
 use App\Http\Middleware\AdminMiddleware;
@@ -33,12 +35,14 @@ Route::middleware('auth')->group(function () {
     Route::resource('/likes', LikeController::class);
     Route::resource('/response', ResponseController::class);
     Route::resource('/answer', AnswerController::class);
+    Route::resource('/report', ReportController::class);
 
     Route::prefix('/admin')->name('admin.')->middleware(AdminMiddleware::class)->group(function() {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::resource('/user', UserController::class);
         Route::resource('/topic', AdminTopicController::class);
         Route::resource('/response', AdminResponseController::class);
+        Route::resource('/report', AdminReportController::class);
     });
 
 

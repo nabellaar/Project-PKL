@@ -29,6 +29,7 @@
                 <a class="collapse-item" href="{{ url('admin/user')}}">User</a>
                 <a class="collapse-item" href="{{ url('admin/topic')}}">Topic</a>
                 <a class="collapse-item" href="{{ url('admin/response')}}">Response</a>
+                <a class="collapse-item" href="{{ url('admin/report')}}">Report</a>  
             </div>
         </div>
     </li>

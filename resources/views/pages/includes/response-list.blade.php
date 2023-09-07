@@ -1,4 +1,5 @@
-    <div class="card">
+
+   <div class="card">
         <div class="row">
             <div class="col-12">
                 @foreach ($response as $item)
@@ -10,7 +11,7 @@
                             <div class="col-8 d-flex">
                                 <h5>
                                     <b>
-                                    {{ $item->user->full_name }}&nbsp;
+                                    {{ $item->user->username }}&nbsp;
                                     </b>
                                 </h5>
                                     
@@ -43,7 +44,7 @@
                                             <a href="javascript:void(0)" onclick="openReply(event, {{ $item->id }}, '{{ $children->user->username }}')">
                                                 <span><i class="fa fa-reply"></i> reply</span>
                                             </a>
-                                            <a class="ml-4" href="javascript:void(0)" onclick="openReport(event, {{ $item->id }}, '{{ $item->user->username }}')">
+                                            <a class="ml-4" href="javascript:void(0)" onclick="openReport(event, {{ $children->id }}, '{{ $children->user->username }}')">
                                                 <span><i class="fa-solid fa-flag"></i> report</span>
                                             </a>
                                         </div>

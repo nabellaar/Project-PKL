@@ -35,7 +35,14 @@ class AuthenticatedSessionController extends Controller
             if (Auth::user()->role == 'admin') {
                 return redirect()->route('admin.dashboard');
             } else {
-                return redirect()->intended('/');
+                if (Auth::user()->status == 0) {
+                    Auth::guard('web')->logout();
+                    $request->session()->invalidate();
+                    $request->session()->regenerateToken();
+                    return redirect('login')->with('error', 'Your Account Is Bloked!!!');
+                } else {
+                    return redirect()->intended('/');
+                }
             }
 
         // return redirect()->intended(RouteServiceProvider::HOME);
