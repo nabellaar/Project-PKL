@@ -169,4 +169,24 @@ class TopicController extends Controller
             ]);
         
     }
+
+    /**
+     * undocumented function summary
+     *
+     * Undocumented function long description
+     *
+     * @param Type $var Description
+     * @return type
+     * @throws conditon
+     **/
+    public function status(Request $request, $id)
+    {
+        $topic = Topic::find($id);
+        $topic->status = $request->status;
+        $topic->save();
+        return response()->json([
+            'status' => 1,
+            'message' => 'Youre topic is updated',
+        ]);
+    }
 }

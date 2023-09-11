@@ -12,6 +12,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\TopicController;
@@ -36,10 +37,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('/response', ResponseController::class);
     Route::resource('/answer', AnswerController::class);
     Route::resource('/report', ReportController::class);
+    Route::put('/profile/{id}', [ProfileController::class, 'update']);
 
     Route::prefix('/admin')->name('admin.')->middleware(AdminMiddleware::class)->group(function() {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::resource('/user', UserController::class);
+        Route::get('/topic-status/{id}', [AdminTopicController::class, 'status'])->name('topic.status');
         Route::resource('/topic', AdminTopicController::class);
         Route::resource('/response', AdminResponseController::class);
         Route::resource('/report', AdminReportController::class);

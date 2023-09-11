@@ -15,7 +15,7 @@
             <tr>
                 <td>{{ ($response->currentpage()-1) * $response->perpage() + $loop->index + 1 }}</td>
                 <td>{{$item->user->username}}</td>
-                <td>{{$item->content}}</td>
+                <td>{!! $item->content !!}</td>
                 <td>{{$item->topic->content}}</td>
                 <td>{{$item->topic->user->username}}</td>
                 <td>{{$item->created_at}}</td>

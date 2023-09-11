@@ -118,5 +118,28 @@
             //     alert('Data Aman!')
             // }
         }
+
+        $('body').on('click', '.btn-status', function (e) {
+            e.preventDefault()
+            var url_status = $(this).data('url');
+            var title = $(this).data('title');
+            var status = $(this).data('status');
+            var result = confirm(status+" this Topic "+title+"?")
+            if (result) {
+                $.ajax({
+                    type: "GET",
+                    url: url_status,
+                    cache: false,
+                    success: function (response) {
+                        $('.success-msg').html(response.message);
+                        $('.alert-show').show();
+                        getTopic(url)
+                    }
+                });
+            } else {
+                alert('data not change')
+            }
+
+        });
 </script>
 @endsection

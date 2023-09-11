@@ -39,31 +39,31 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item @if (Request::segment(1) == '') active @endif">
         <a class="nav-link collapsed" href="{{ url('/') }}">
-            <span class="mx-3"><i class="fa-solid fa-house"></i> Home</span>
+            <span class="mx-3"><i class="fa-solid fa-house"></i>&nbsp; Home</span>
         </a>
     </li>
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item @if (Request::segment(1) == 'topic') active @endif">
         <a class="nav-link collapsed" href="{{ url('/topic') }}">
-            <span class="mx-3"><i class="fa-solid fa-book"></i> My Topics</span>
+            <span class="mx-3"><i class="fa-solid fa-book"></i>&nbsp; My Topics</span>
         </a>
     </li>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item @if (Request::segment(1) == 'answer') active @endif">
         <a class="nav-link collapsed" href="{{ url('/answer') }}">
-            <span class="mx-3"><i class="fa-solid fa-pen"></i> My Answers</span>
+            <span class="mx-3"><i class="fa-solid fa-pen"></i>&nbsp; My Answers</span>
         </a>
     </li>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item @if (Request::segment(1) == 'likes') active @endif">
         <a class="nav-link collapsed" href="{{ url('/likes') }}">
-            <span class="mx-3"><i class="fa-solid fa-thumbs-up"></i> Liked Topics</span>
+            <span class="mx-3"><i class="fa-solid fa-thumbs-up"></i>&nbsp; Liked Topics</span>
         </a>
     </li>
     <!-- Button to trigger the modal -->
     <button type="button" class="btn btn-primary p-2 justify-content-center mx-4 my-3" data-toggle="modal"
         data-target="#addTopic" style="border-color: #435AE7; background-color: #fff; color: #435AE7;">
-        <i class="fa-solid fa-plus"></i> Create a New Topic
+        <i class="fa-solid fa-plus"></i>&nbsp; Create a New Topic
     </button>
     @endif
 

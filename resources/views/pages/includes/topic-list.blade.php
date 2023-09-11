@@ -3,6 +3,17 @@
     <div class="card shadow mb-4 col-lg-12 col-md-12">
         <!-- Card Body -->
         <div class="card-body">
+
+            @if ($item->status == '0')
+            <span class="badge bg-red">Blocked</span>
+            @elseif ($item->status == '1')
+            <span class="badge bg-green">Publish</span>
+            @elseif ($item->status == '2')
+            <span class="badge bg-orange">Draft</span>
+            @elseif ($item->status == '3')
+            <span class="badge bg-cyan">Requested</span>
+            @endif
+            
             <h5 style="color: #435AE7">{{ $item->title }}</h5>
             <p style="color:#000; font-size: 15px; margin-top: 15px;">{{ $item->content }}</p>
             <div class="text-center">

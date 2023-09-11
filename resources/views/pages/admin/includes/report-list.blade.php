@@ -33,7 +33,7 @@
             </td>
             <td>
                 <button class="btn btn-outline-danger btn-sm" onclick="deleteReport(event, {{$item->id}}"><i class="fa-solid fa-trash-can"></i>&nbsp; Delete</button>
-                <button class="btn btn-outline-dark btn-sm" onclick="blockUser(event, {{$item->user->id}})">Block</button>
+                <button class="btn btn-outline-dark btn-sm" onclick="blockUser(event, {{$item->user->id}})"><i class="fa-solid fa-ban"></i>&nbsp;Block</button>
             </td>
         </tr>
         @endforeach
