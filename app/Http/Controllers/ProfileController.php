@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -80,6 +81,19 @@ class ProfileController extends Controller
             'password'           => ['nullable','min:6', 'string'],
             'no_handphone'           => ['required', 'min:9', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'max:14'],
         ]);
+
+        if ($request->hasFile('image')){
+            $path = 'img/profile'.$user->foto;
+            if (is_file($path)) {
+                unlink($path);
+            }
+            $file = $request->file('image');
+            $ext  = $file->getClientOriginalExtension();
+            $newName = Str::slug($request->username).'-'.md5(uniqid(rand(), true)).$ext;
+            $file->move(public_path('img/profile/'), $newName);
+            $user->foto = $newName;
+            $user->save();
+        }
         
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput();

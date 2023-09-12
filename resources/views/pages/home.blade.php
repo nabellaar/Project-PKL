@@ -16,7 +16,7 @@
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
                             <div class="dropdown no-arrow">
-                                <img class="rounded-circle" style="height :60px; "
+                                <img class="rounded-circle" width="50px" style="aspect-ratio: 1/1;"
                                     src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) :asset('img/profile/default.jpg') }}"
                                     alt="">
                                 <h5 class="user-name">{{ $item->user->username }}</h5>
@@ -97,7 +97,7 @@
                     <!-- Card Body -->
                     <div class="card-body">
                         @foreach ($trending as $trend )
-                        <img style="height: 50px;" class="rounded-circle" src="{{ $trend->user->foto ? asset('img/profile/'.$trend->user->foto) : asset('img/profile/default.jpg') }}" alt="">
+                        <img width="50px" style="aspect-ratio: 1/1;" class="rounded-circle" src="{{ $trend->user->foto ? asset('img/profile/'.$trend->user->foto) : asset('img/profile/default.jpg') }}" alt="">
                         <p class="user-trending">{{$trend->user->username}}</p>
                         <p class="time-trending">{{ date('d M Y', strtotime($trend->updated_at))}}</p>
                         <p class="content-trending">{{$trend->content}}</p>
@@ -121,7 +121,7 @@
                     <!-- Card Body -->
                     <div class="card-body">
                         @foreach ($top_user as $top)
-                        <img style="height: 45px; margin-bottom: 10px;" class="rounded-circle" src="{{ $top->foto ? asset('img/profile/'.$top->user->foto) : asset('img/profile/default.jpg') }}" alt="">
+                        <img width="50px" style="aspect-ratio: 1/1;" class="rounded-circle" src="{{ $top->foto ? asset('img/profile/'.$top->foto) : asset('img/profile/default.jpg') }}" alt="">
                         <p class="top-user">{{$top->username}}</p>
                         <p class="user-post">{{$top->topic_count}} Topic</p>
                         <hr style="margin-top: 30px;">

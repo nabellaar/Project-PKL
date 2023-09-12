@@ -5,13 +5,13 @@
         <div class="card-body">
 
             @if ($item->status == '0')
-            <span class="badge bg-red">Blocked</span>
+            <span class="badge bg-red float-right">Blocked</span>
             @elseif ($item->status == '1')
-            <span class="badge bg-green">Publish</span>
+            <span class="badge bg-green float-right">Publish</span>
             @elseif ($item->status == '2')
-            <span class="badge bg-orange">Draft</span>
+            <span class="badge bg-orange float-right">Draft</span>
             @elseif ($item->status == '3')
-            <span class="badge bg-cyan">Requested</span>
+            <span class="badge bg-cyan float-right">Requested</span>
             @endif
             
             <h5 style="color: #435AE7">{{ $item->title }}</h5>
@@ -20,7 +20,7 @@
                 <img src="{{ asset('img/'.$item->image) }}" alt="" class="img-fluid">
             </div>
             <hr style="margin-top: 30px;">
-            <img class="rounded-circle" style="height: 30px;"
+            <img class="rounded-circle" style="aspect-ratio: 1/1;" width="30px"
                 src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) : asset('img/profile/default.jpg') }}"
                 alt="">
             <p style="font-size: 12px; margin-left: 35px; margin-top: -23px;">Posted by <span style="color: #435AE7;">{{

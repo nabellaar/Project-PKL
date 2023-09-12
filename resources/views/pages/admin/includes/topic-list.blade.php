@@ -1,6 +1,12 @@
+<button class="btn btn-outline-danger btn-sm" onclick="deleteAll()">Delete All Selected</button>
 <table class="table datatable-table mt-4" id="dataTable" width="100%" cellspacing="0">
     <thead>
         <tr>
+            <th>
+                <a href="javascript:void(0)" onclick="checkAll()" class="btn btn-outline-primary btn-xs">
+                    <i class="fa-solid fa-circle-check" style="color: #0056d6;"></i>
+                </a>
+            </th>
             <th>No</th>
             <th>Title Topic</th>
             <th>Content</th>
@@ -13,6 +19,9 @@
     <tbody>
         @foreach ($topic as $item)
         <tr>
+            <td>
+                <input type="checkbox" name="selected" class="selected-topic" value="{{ $item->id }}">
+            </td>
             <td>{{ ($topic->currentpage()-1) * $topic->perpage() + $loop->index + 1 }}</td>
             <td>{{ $item->title }}</td>
             <td>{{ $item->content }}</td>

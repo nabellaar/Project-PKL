@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/admin')->name('admin.')->middleware(AdminMiddleware::class)->group(function() {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::resource('/user', UserController::class);
+        Route::get('/topic/multiDelete', [AdminTopicController::class, 'multiDelete'])->name('topic.multiDelete');
         Route::get('/topic-status/{id}', [AdminTopicController::class, 'status'])->name('topic.status');
         Route::resource('/topic', AdminTopicController::class);
         Route::resource('/response', AdminResponseController::class);

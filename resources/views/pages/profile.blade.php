@@ -18,7 +18,7 @@
             <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 2 MB</div>
             <!-- Profile picture upload button-->
             <div class="custom-file">
-              <input class="custom-file-input" type="file" id="customFile" accept="image/*">
+              <input class="custom-file-input" type="file" id="customFile" accept="image/*" name="image">
               <label class="custom-file-label" for="customFile">Choose File</label>
             </div>
           </div>
@@ -80,7 +80,7 @@
               </div>
               @enderror
             </div>
-            <a href="{{ url('/') }}" class="btn btn-outline-primary">Cancel</a>
+            <a href="{{ url('/') }}" class="btn btn-outline-danger">Cancel</a>
             <button type="submit" class="btn btn-outline-primary">Save</button>
           </div>
         </div>

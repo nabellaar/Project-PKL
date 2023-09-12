@@ -28,6 +28,7 @@
 @section('scripts')
 <script>
     var url = "{{ route('admin.topic.index') }}"
+    var checked = false;
     getTopic(url)
 
     $('#search-topic').keyup(function (e) { 
@@ -35,6 +36,48 @@
         var search = $(this).val();
         getTopic(url + '?search=' + search)
     });
+
+    function checkAll() {
+        $('.selected-topic').each(function() {
+            if (checked == false) {
+                $(this).prop("checked", true);
+            } else if (checked == true) {
+                $(this).prop("checked", false);
+            }
+        })
+
+        if (checked == false) {
+            checked = true;
+        } else if (checked == true) {
+            checked = false;
+        }
+    }
+
+    function deleteAll() {
+        var selected = [];
+        $("input:checkbox[name=selected]:checked").each(function() {
+            selected.push($(this).val());   
+        });
+        var result = confirm("Are You Sure to Delete All Selected Topic ?")
+            if (result) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('admin.topic.multiDelete') }}",
+                    data: {
+                        'selected': selected
+                    },
+                    success: function (response) {
+                        $('.success-msg').html(response.message);
+                                $('.alert-show').show();
+                                getTopic(url)
+                    }
+                });
+                
+            } else {
+                alert('data not change')
+            }
+
+    }
 
     function getTopic(url) {
         $.ajax({

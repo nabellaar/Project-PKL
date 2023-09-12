@@ -6,7 +6,7 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
                     <div class="dropdown no-arrow">
-                        <img style="height :50px; " class="rounded-circle"
+                        <img style="aspect-ratio: 1/1;" width="50px" class="rounded-circle"
                             src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) :asset('img/profile/default.jpg') }}"
                             alt="">
                         <h5 style="margin-left: 60px; color:#000; margin-top: -45px; font-size: 15px;">{{
@@ -24,7 +24,7 @@
                     <p style="color :#435AE7; font-size: 15px; margin-top: 35px;">{{ $item->response->count() }} Answer</p>
                     <hr>
                     @foreach ($item->response as $response )
-                    <img style="height: 50px; margin-left: 20px;" class="rounded-circle"
+                    <img style="aspect-ratio: 1/1;" width="60px" class="rounded-circle"
                         src="{{ $response->user->foto ? asset('img/profile/'.$response->user->foto) : asset('img/profile/default.jpg') }}" alt="">
                                             <h5 style=" font-size: 15px; color: #000; margin-left: 80px; margin-top:
                         -40px;">{{ $response->user->username }}</h5>

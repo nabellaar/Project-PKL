@@ -4,8 +4,8 @@
             <div class="col-12">
                 @foreach ($response as $item)
                 <div class="media my-4">
-                    <img class="mr-3 rounded-circle" alt=""
-                        src="{{ $item->user->photo ? asset('img/profile/'.$item->user->photo) : asset('img/profile/default.jpg') }}" />
+                    <img class="mr-3 rounded-circle" alt="" style="aspect-ratio: 1/1;" width="50px"
+                        src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) : asset('img/profile/default.jpg') }}" />
                     <div class="media-body">
                         <div class="row">
                             <div class="col-8 d-flex">
@@ -32,7 +32,7 @@
                         @foreach ( $item->children()->get() as $children )
                         <div class="media my-4">
                             <a class="pr-3" href="#"><img class="rounded-circle" alt=""
-                                src="{{ $children->user->photo ? asset('img/profile/'.$children->user->photo) : asset('img/profile/default.jpg') }}" /></a>
+                                src="{{ $children->user->foto ? asset('img/profile/'.$children->user->foto) : asset('img/profile/default.jpg') }}" /></a>
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-8 d-flex">
@@ -67,7 +67,7 @@
                                     <span id="error-message{{ $item->id }}"></span>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" id="btnReply{{ $item->id }}" onclick="sendReply(event, {{ $item->id }})">Submit</button>
+                                    <button type="button" class="btn btn-primary mt-3" id="btnReply{{ $item->id }}" onclick="sendReply(event, {{ $item->id }})">Submit</button>
                                 </div>
                             </form>
                         </div>

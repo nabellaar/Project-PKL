@@ -11,7 +11,7 @@
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
                         <div class="dropdown no-arrow">
-                            <img class="rounded-circle" style="height :50px; "
+                            <img class="rounded-circle" style="aspect-ratio: 1/1;" width="50px"
                                 src="{{ $topic->user->foto ? asset('img/profile/'.$topic->user->foto) : asset('img/profile/default.jpg') }}"
                                 alt="">
                             <h5 style="margin-left: 60px; color:#000; margin-top: -45px; font-size: 15px;">

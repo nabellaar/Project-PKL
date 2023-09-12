@@ -189,4 +189,20 @@ class TopicController extends Controller
             'message' => 'Youre topic is updated',
         ]);
     }
+
+    public function multiDelete (Request $request)
+    {
+        $topic = Topic::whereIn('id', $request->selected);
+        foreach ($topic as $key => $value) {
+            $path = 'img/'.$value->image;
+            if (is_file($path)) {
+                unlink($path);
+            }
+        }
+        $topic->delete();
+            return response()->json([
+                'status'    => true,
+                'message' => 'Youre topic has been deleted',
+            ]);
+    }
 }
