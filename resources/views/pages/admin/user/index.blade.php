@@ -6,7 +6,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
         </div>
         <div class="card-body">
-            <a class="btn btn-outline-primary mb-3 btn-sm" href="{{ route('admin.user.create')}}"><i class="fa-solid fa-plus"></i>&nbsp; Create</a>
+            <a class="btn btn-outline-primary mb-3 mt-4 btn-sm" href="{{ route('admin.user.create')}}"><i class="fa-solid fa-plus"></i>&nbsp; Create</a>
             <form
                 class="d-none d-sm-inline-block float-right form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
                 method="GET">

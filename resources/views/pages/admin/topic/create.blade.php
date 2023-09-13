@@ -1,9 +1,9 @@
 @extends('layouts.main')
 @section('content')
-<div class="container-fuild">
+<div class="container-fuild m-2">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Create User</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Create Topic</h6>
         </div>
         <div class="card-body">
             <form action="{{ route('admin.topic.store')}}" method="post" enctype="multipart/form-data">
@@ -22,7 +22,7 @@
                     <label for="commentImage" style="color: #435AE7;">Image</label>
                     <input type="file" class="form-control" id="commentContent" name="image" accept="image/*">
                 </div>
-                <a href="{{ route('admin.topic.index') }}" class="btn btn-outline-primary">Cancel</a>
+                <a href="{{ route('admin.topic.index') }}" class="btn btn-outline-danger">Cancel</a>
                 <button type="submit" class="btn btn-outline-primary">Save</button>
             </form>
         </div>

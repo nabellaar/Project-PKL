@@ -71,7 +71,7 @@
                     </div>
                     @enderror
                 </div>
-                <a href="{{ route('admin.user.index') }}" class="btn btn-outline-primary">Cancel</a>
+                <a href="{{ route('admin.user.index') }}" class="btn btn-outline-danger">Cancel</a>
                 <button type="submit" class="btn btn-outline-primary">Save</button>
             </form>
         </div>

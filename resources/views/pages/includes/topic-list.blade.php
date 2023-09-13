@@ -31,8 +31,8 @@
                 response ></a>
         </div>
         <div class="card-footer">
-            <button class="btn-edit" onclick="modalEdit({{$item->id}});">Edit</button>
-            <button class="btn-dlt" onclick="deleteTopic(event, {{$item->id}}, '{{$item->title}}')">Delete</button>
+            <button class="btn-edit btn btn-outline-primary btn-sm" onclick="modalEdit({{$item->id}});">Edit</button>
+            <button class="btn-dlt btn btn-outline-danger btn-sm" onclick="deleteTopic(event, {{$item->id}}, '{{$item->title}}')">Delete</button>
         </div>
     </div>
 </div>

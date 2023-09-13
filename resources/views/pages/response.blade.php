@@ -6,7 +6,7 @@
     <div class="row">
         <!-- Area Chart -->
         <div class="col-xl-12 col-lg-7">
-            <div class="row">
+            <div class="row m-2">
                 <div class="card shadow mb-4 col-lg-12 col-md-12">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
@@ -26,7 +26,7 @@
                         <h5 style="color: #435AE7;">{{ $topic->title }}</h5>
                         <p style="color:#000; font-size: 15px;">{{ $topic->content }}</p>
                         <p style="color :#435AE7; font-size: 15px; margin-top: 35px;" id="count-answer">{{ $topic->response->count() }} Answer</p>
-                        <button class="btn-response btn-outline-primary p-2 justify-content-center my-3" data-topic="{{ $topic->id }}"><i class="fa-solid fa-share"></i> 
+                        <button class="btn-response btn btn-outline-primary p-2 justify-content-center my-3 btn-sm" data-topic="{{ $topic->id }}"><i class="fa-solid fa-share"></i>&nbsp; 
                             Add Response</button>
                         <hr>
                         <div class="col-12 text-center" id="load-icon" style="display: none">
@@ -114,19 +114,6 @@
     </div>
 </div>
 <!-- End of Page Wrapper -->
-@endsection
-@section('styles')
-<style>
-    .btn-response {
-        text-decoration: none;
-        background-color: #fff;
-        color: #435AE7;
-        border-color: #435AE7;
-        border-radius: 10px;
-        font-size: 15px;
-
-    }
-</style>
 @endsection
 @section('scripts')
 <script>

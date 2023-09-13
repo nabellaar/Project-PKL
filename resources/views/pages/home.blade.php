@@ -3,7 +3,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Content Row -->
-    <div class="row mx-3">
+    <div class="row ">
         <!-- TopicHome -->
         <div class="col-xl-8 col-lg-7">
             <div class="col-12 text-center" id="load-icon" style="display: none">
@@ -33,15 +33,15 @@
                             <div class="">
                                 <img src="{{ asset('img/'.$item->image) }}" alt="" width="300px">
                             </div>
-                            <button class="btn-response btn-outline-primary p-2 justify-content-center my-3" data-topic="{{ $item->id }}"><i class="fa-solid fa-share"></i> 
+                            <button class="btn btn-response btn-outline-primary justify-content-center btn-sm" data-topic="{{ $item->id }}"><i class="fa-solid fa-share"></i> &nbsp;
                                 Add Response</button>
-                                <button class="btn @if (!user_likes(Auth::user()->id, $item->id)) btn-outline-primary @else btn-primary @endif justify-content-center btn-like" data-user="{{Auth::user()->id}}" data-topic="{{$item->id}}"><i class="fa-solid fa-thumbs-up"></i>
+                                <button class="btn btn-sm @if (!user_likes(Auth::user()->id, $item->id)) btn-outline-primary @else btn-primary @endif justify-content-center btn-like" data-user="{{Auth::user()->id}}" data-topic="{{$item->id}}"><i class="fa-solid fa-thumbs-up"></i>&nbsp;
                                     @if (!user_likes(Auth::user()->id, $item->id)) Like @else Unlike @endif
                                 </button>
                                     <a href="{{ url('topic/'. encrypt($item->id)) }}">
-                                        <button class="btn-see-rspn btn-outline-primary justify-content-center float-right">See all response <i class="fa-solid fa-angle-right"></i></button>
+                                        <button class="btn btn-see-rspn btn-outline-primary float-right btn-sm">See all response &nbsp;<i class="fa-solid fa-angle-right"></i></button>
                                     </a>
-                                    <p style="color: #435AE7; font-size: 15px;" class="my-1">{{ $item->response->count() }} answer</p>
+                                    <p class="my-1 mt-3 home-answer">{{ $item->response->count() }} answer</p>
                         </div>
                     </div>
                     @endforeach
@@ -83,7 +83,7 @@
 
         <!-- Pie Chart -->
         <div class="col-xl-4 col-lg-5">
-            <div class="row pl-2">
+            <div class="row m-1">
                 <div class="card shadow mb-4 col-lg-12 col-md-12">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header d-flex flex-row align-items-center justify-content-between bg-white">
@@ -100,8 +100,9 @@
                         <img width="50px" style="aspect-ratio: 1/1;" class="rounded-circle" src="{{ $trend->user->foto ? asset('img/profile/'.$trend->user->foto) : asset('img/profile/default.jpg') }}" alt="">
                         <p class="user-trending">{{$trend->user->username}}</p>
                         <p class="time-trending">{{ date('d M Y', strtotime($trend->updated_at))}}</p>
+                        <p class="title-trending">{{$trend->title}}</p>
                         <p class="content-trending">{{$trend->content}}</p>
-                            {{$trend->likes_count}} likes
+                        <p class="total-likes-trending">{{$trend->likes_count}} likes</p> 
                             <hr>
                         @endforeach
                     </div>
@@ -152,9 +153,19 @@
         margin-top: -15px;
     }
 
+    .title-trending {
+        color: #435AE7;
+        margin-bottom: 10px;
+    }
+
     .content-trending {
         color: #000;
         font-size: 15px;
+    }
+
+    .total-likes-trending {
+        color: #435AE7;
+        font-size: 13px;
     }
 
     .top-user {
@@ -162,7 +173,6 @@
         margin-left: 60px;
         font-size: 15px;
         margin-top: -45px;
-        "
 
     }
 
@@ -171,6 +181,11 @@
         font-size: 10px;
         margin-top: -35px;
         margin-left: 90%
+    }
+
+    .home-answer {
+        color: #435AE7; 
+        font-size: 15px;
     }
 
 </style>
@@ -196,7 +211,7 @@
         font-size: 15px;
     }
 
-    .btn-response {
+    /* .btn-response {
         text-decoration: none;
         background-color: #fff;
         color: #435AE7;
@@ -204,9 +219,9 @@
         border-radius: 10px;
         font-size: 15px;
 
-    }
+    } */
 
-    .btn-see-rspn {
+     .btn-see-rspn {
         /* text-decoration: none; */
         background-color: white;
         /* color: #435AE7;
@@ -215,8 +230,9 @@
         font-size: 15px;
         /* color: #435AE7; */
         /* margin-right: 20%; */
-        margin-top: 25px; 
+       
 
+    
     }
 </style>
 @endsection

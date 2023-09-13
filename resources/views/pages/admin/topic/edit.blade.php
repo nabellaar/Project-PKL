@@ -25,7 +25,7 @@
                     <label for="commentImage" style="color: #435AE7;">Image</label>
                     <input type="file" class="form-control" id="commentContent" name="image" accept="image/*" >
                 </div>
-                <a href="{{ route('admin.topic.index') }}" class="btn btn-outline-primary">Cancel</a>
+                <a href="{{ route('admin.topic.index') }}" class="btn btn-outline-danger">Cancel</a>
                 <button type="submit" class="btn btn-outline-primary">Save</button>
             </form>
         </div>

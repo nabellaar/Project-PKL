@@ -3,8 +3,8 @@
     <thead>
         <tr>
             <th>
-                <a href="javascript:void(0)" onclick="checkAll()" class="btn btn-outline-primary btn-xs">
-                    <i class="fa-solid fa-circle-check" style="color: #0056d6;"></i>
+                <a href="javascript:void(0)" onclick="checkAll()" class="btn btn-primary btn-xs">
+                    <i class="fa-solid fa-check" style="color: #ffffff;"></i>
                 </a>
             </th>
             <th>No</th>
@@ -46,7 +46,7 @@
                 <a href="javascript:void(0)" data-status="Cancel" data-title="{{ $item->title }}" data-url="{{ route('admin.topic.status', $item->id)}}?status=3" class="btn-status btn btn-outline-orange btn-sm m-2"><i class="fa-solid fa-xmark"></i>&nbsp; Cancel</a>
 
                 @elseif ($item->status == '2')
-                <a href="javascript:void(0)" data-status="Publish" data-title="{{ $item->title }}" data-url="{{ route('admin.topic.status', $item->id)}}?status=1" class="btn-status btn btn-outline-primary btn-sm m-2"><i class="fa-solid fa-xmark"></i>&nbsp; Publish</a>
+                <a href="javascript:void(0)" data-status="Publish" data-title="{{ $item->title }}" data-url="{{ route('admin.topic.status', $item->id)}}?status=1" class="btn-status btn btn-outline-primary btn-sm m-2"><i class="fa-solid fa-upload"></i>&nbsp; Publish</a>
 
                 @elseif ($item->status == '3')
                 <a href="javascript:void(0)" data-status="Accept" data-title="{{ $item->title }}" data-url="{{ route('admin.topic.status', $item->id)}}?status=1" class="btn-status btn btn-outline-blue btn-sm m-2"><i class="fa-solid fa-check"></i>&nbsp; Accept</a>

@@ -49,7 +49,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     @foreach ($top_user as $top)
-                    <img style="height: 50px;" class="rounded-circle" src="{{ $top->foto ? asset('img/profile/'.$top->user->foto) : asset('img/profile/default.jpg') }}" alt="">
+                    <img style="height: 50px;" class="rounded-circle" src="{{ $top->user->foto ? asset('img/profile/'.$top->user->foto) : asset('img/profile/default.jpg') }}" alt="">
                     <p class="top-user-admin">{{$top->username}}</p>
                     <p class="top-count-admin">{{$top->topic_count}} Topic</p>
                     <hr class="hr-top-admin">  
