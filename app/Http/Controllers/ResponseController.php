@@ -15,8 +15,10 @@ class ResponseController extends Controller
      */
     public function index(Request $request)
     {
+        
         $response = Response::where('topic_id', $request->topic_id)
             ->where('parent_id', 0)
+            ->where('status', 1)
             ->orderBy('id', 'DESC')
             ->paginate(10);
         return view('pages.includes.response-list', compact('response'));
@@ -45,8 +47,8 @@ class ResponseController extends Controller
             'content'           => ['required', 'min:3']
         ],
         [
-            'content.required'  => 'Content Harus Diisi!',
-            'content.min'       => 'Content Minimal :min Karakter!'
+            'content.required'  => 'Content must be filled in!',
+            'content.min'       => 'Content must have a minimum of :min characters!'
         ]);
         
         if ($validator->fails()) {

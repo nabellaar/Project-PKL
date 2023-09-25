@@ -25,9 +25,15 @@
                     <div class="card-body">
                         <h5 style="color: #435AE7;">{{ $topic->title }}</h5>
                         <p style="color:#000; font-size: 15px;">{{ $topic->content }}</p>
+                        <div class="mb-3">
+                            <img src="{{ asset('img/'.$topic->image) }}" alt="" width="500px">
+                        </div>
                         <p style="color :#435AE7; font-size: 15px; margin-top: 35px;" id="count-answer">{{ $topic->response->count() }} Answer</p>
                         <button class="btn-response btn btn-outline-primary p-2 justify-content-center my-3 btn-sm" data-topic="{{ $topic->id }}"><i class="fa-solid fa-share"></i>&nbsp; 
                             Add Response</button>
+                        @if (Auth::id() != $topic->user->id)
+                        <button class="btn btn-outline-primary btn-sm float-right"><i class="fa-solid fa-flag"></i>&nbsp;Report</button>
+                        @endif
                         <hr>
                         <div class="col-12 text-center" id="load-icon" style="display: none">
                             <img width="50px" src="{{ asset('img/loading.gif')}}" alt="">
@@ -42,7 +48,7 @@
                          <div class="modal-content">
                             <form id="form-add-response" method="post">
                                 @csrf
-                                <input type="hidden" name="topic_id" id="topic_id">
+                                <input type="hidden" name="topic_id" id="topic_id" value="{{ $topic->id }}">
                                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
                                 <input type="hidden" name="parent_id" id="parent_id" value="0">
                                 <div class="modal-header">
@@ -143,8 +149,9 @@
 
         $('.btn-response').click(function (e) { 
             e.preventDefault();
-            var topic_id = $(this).data('topic');
-            $('#topic_id').val(topic_id);
+            // var topic_id = $(this).data('topic');
+            // console.log(topic_id);
+            // $('#topic_id').val(topic_id);
             $('#commentModal').modal('show');
         });
 

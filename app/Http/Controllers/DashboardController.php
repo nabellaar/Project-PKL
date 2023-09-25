@@ -11,7 +11,13 @@ class DashboardController extends Controller
 {
     public function index ()
     {
-        $topic = Topic::where('status', 1)->orderBy('id', 'DESC')->paginate(5);
+        $topic = Topic::with(['response' => function($q){
+            $q->where('status', 1);
+        }])
+        ->where('status', 1)
+        ->withCount('response')
+        ->orderBy('id', 'DESC')
+        ->paginate(5);
         $likes = new Like();
         $trending = Topic::withCount('likes')
             ->having('likes_count', '!=', 0)

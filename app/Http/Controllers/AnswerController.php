@@ -18,7 +18,9 @@ class AnswerController extends Controller
         if ($request->ajax()) {
             $answer = Topic::whereHas('response', function($q) {
                 $q->where('user_id', Auth::user()->id);
-            })->paginate(5); 
+                $q->where('status', 1);
+            })
+            ->paginate(5); 
             return view('pages.includes.answer-list', compact('answer'));
         }
 

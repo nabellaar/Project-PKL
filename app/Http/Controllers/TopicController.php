@@ -50,12 +50,12 @@ class TopicController extends Controller
             'image'     => ['image', 'max:2048'],
         ],
         [
-            'title.required'    => 'Judul Harus Diisi!',
-            'title.min'         => 'Judul Harus Diisi :min Karakter',
-            'title.max'         => 'Judul Diisi Maksimal :min Karakter',
-            'content.required'  => 'Content Harus Diisi!',
-            'content.min'       => 'Konten Harus Diisi Minimal :min Karakter',
-            'image.max'         => 'Gambar Harus Kurang Dari :max kb'
+            'title.required'    => 'The title must be filled in!',
+            'title.min'         => 'Title Must be filled in :min Characters',
+            'title.max'         => 'The title should be filled with a maximum of :min characters',
+            'content.required'  => 'Content must be filled in!',
+            'content.min'       => 'Content must be filled with a minimum of :min characters',
+            'image.max'         => 'The image must be less than :max kb'
         ]);
 
         if ($validator->fails()) {
@@ -67,7 +67,7 @@ class TopicController extends Controller
             'content'   => $request->content,
             'slug'      => Str::slug($request->title),
             'user_id'   => Auth::user()->id,
-            'status'    => 3
+            'status'    => 1
         ]);
 
         if ($request->hasFile('image')){
@@ -80,9 +80,9 @@ class TopicController extends Controller
         }
 
         if ($topic) {
-            return redirect('/')->with('success', 'Data Berhasil Disimpan!');
+            return redirect('/')->with('success', 'Data has been successfully saved!');
         } else {
-            return redirect()->back()->with('error', 'Data Gagal Disimpan!');
+            return redirect()->back()->with('error', 'Data failed to be saved!');
         }
     }
 
@@ -97,7 +97,12 @@ class TopicController extends Controller
     public function show($id)
     {
         $topic_id   = decrypt($id);
-        $topic      = Topic::find($topic_id);
+        $topic      = Topic::with(['response' => function($q){
+            $q->where('status', 1);
+        }])
+            ->where('id', $topic_id)
+            ->withCount('response')
+            ->first();
         return view('pages.response', compact('topic'));
     }
 
@@ -130,18 +135,18 @@ class TopicController extends Controller
             'image'     => ['max:2048'],
         ],
         [
-            'title.required' => 'Judul Harus Diisi!',
-            'title.min' => 'Judul Harus Diisi :min Karakter',
-            'title.max' => 'Judul Diisi Maksimal :min Karakter',
-            'content.required' => 'Content Harus Diisi!',
-            'content.min' => 'Konten Harus Diisi Minimal :min Karakter',
-            'image.max'         => 'Gambar Harus Kurang Dari :max kb',
+            'title.required'    => 'The title must be filled in!',
+            'title.min'         => 'Title Must be filled in :min Characters',
+            'title.max'         => 'The title should be filled with a maximum of :min characters',
+            'content.required'  => 'Content must be filled in!',
+            'content.min'       => 'Content must be filled with a minimum of :min characters',
+            'image.max'         => 'The image must be less than :max kb'
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'status'    => false,
-                'message'   => 'Validasi Gagal',
+                'message'   => 'Validation failed',
                 'data'      => $validator->errors(),
             ]);
         }
@@ -171,13 +176,13 @@ class TopicController extends Controller
         if ($topic) {
             return response()->json([
                 'status'    => true,
-                'message'   => 'Data Berhasil Disimpan',
+                'message'   => 'Data has been successfully saved',
                 'data'      => $topic
             ]);
         } else {
             return response()->json([
                 'status'    => false,
-                'message'   => 'Data Gagal Disimpan!',
+                'message'   => 'Data failed to be saved',
             ]);
         }
     }
@@ -198,7 +203,7 @@ class TopicController extends Controller
         $topic->delete();
         return response()->json([
             'status'    => true,
-            'message'   => 'Data Berhasil Dihapus!'
+            'message'   => 'Data has been successfully deleted!'
         ]);
     }
 }

@@ -39,6 +39,7 @@ class ReportController extends Controller
             'user_id' => $request->user_id,
             'response_id' => $request->response_id,
             'reason' => $request->reason,
+            'table_name' => $request->table_name,
         ]);
         return response()->json([
             'status' => true,

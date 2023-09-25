@@ -25,7 +25,7 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">From User :</h6>
+                <h6 class="collapse-header">From Menu :</h6>
                 <a class="collapse-item" href="{{ url('admin/user')}}">User</a>
                 <a class="collapse-item" href="{{ url('admin/topic')}}">Topic</a>
                 <a class="collapse-item" href="{{ url('admin/response')}}">Response</a>

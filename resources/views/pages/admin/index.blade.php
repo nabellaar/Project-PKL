@@ -30,7 +30,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     @foreach ($trending as $trend)  
-                    <img style="height: 50px;" class="rounded-circle" src="{{ $trend->user->foto ? asset('img/profile/'.$trend->user->foto) : asset('img/profile/default.jpg') }}" alt="">
+                    <img width="50px" style="aspect-ratio: 1/1;" class="rounded-circle" src="{{ $trend->user->foto ? asset('img/profile/'.$trend->user->foto) : asset('img/profile/default.jpg') }}" alt="">
                     <p class="user-admin">{{$trend->user->username}}</p>
                     <p class="date-trending">{{ date('d M Y', strtotime($trend->updated_at))}}</p>
                     <p class="content-admin">{{$trend->content}}</p>
@@ -49,7 +49,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     @foreach ($top_user as $top)
-                    <img style="height: 50px;" class="rounded-circle" src="{{ $top->user->foto ? asset('img/profile/'.$top->user->foto) : asset('img/profile/default.jpg') }}" alt="">
+                    <img width="50px" style="aspect-ratio: 1/1;" class="rounded-circle" src="{{ $top->foto ? asset('img/profile/'.$top->foto) : asset('img/profile/default.jpg') }}" alt="">
                     <p class="top-user-admin">{{$top->username}}</p>
                     <p class="top-count-admin">{{$top->topic_count}} Topic</p>
                     <hr class="hr-top-admin">  

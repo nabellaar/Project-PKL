@@ -16,10 +16,10 @@
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
                             <div class="dropdown no-arrow">
-                                <img class="rounded-circle" style="height :60px; "
+                                <img class="rounded-circle"  width="50px" style="aspect-ratio: 1/1;"
                                     src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) :asset('img/profile/default.jpg') }}"
                                     alt="">
-                                <h5 class="user-name">{{ $item->user->full_name }}</h5>
+                                <h5 class="user-name">{{ $item->user->username }}</h5>
                                 <p class="user-date">{{ date('d M Y', strtotime($item->updated_at)) }}</p>
                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -33,14 +33,14 @@
                             <div class="text-center">
                                 <img src="{{ asset('img/'.$item->image) }}" alt="" class="img-fluid">
                             </div>
-                            <button class="btn-response p-2 justify-content-center my-3" data-toggle="modal"
+                            <button class="btn btn-outline-primary btn-sm" data-toggle="modal"
                                 data-target="#commentModal"><i class="fa-solid fa-share"></i> Add Response</button>
-                            <button class="btn-like p-2 my-3 justify-content-center"><i class="fa-solid fa-thumbs-up"></i>
+                            <button class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-thumbs-up"></i>
                                 Like</button>
                             <a href="/all_response">
-                                <button class="btn-see-rspn p-2 my-3 justify-content-center">See all response ></button>
+                                <button class="btn btn-outline-primary btn-sm float-right">See all response ></button>
                             </a>
-                            <p style="color: #435AE7; font-size: 15px;" class="my-1">15 Answers</p>
+                            <p style="color: #435AE7; font-size: 15px;" class="my-3 pt-2">15 Answers</p>
                         </div>
     
                         <!-- Modal -->

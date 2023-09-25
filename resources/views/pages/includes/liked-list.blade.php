@@ -5,10 +5,10 @@
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
             <div class="dropdown no-arrow">
                 <img class="rounded-circle" style="aspect-ratio: 1/1;" width="50px"
-                    src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) :asset('img/profile/default.jpg') }}"
+                    src="{{ $item->topic->user->foto ? asset('img/profile/'.$item->topic->user->foto) :asset('img/profile/default.jpg') }}"
                     alt="">
                 <h5 style="margin-left: 70px; color:#000; margin-top: -50px; font-size: 17px;">
-                    {{ $item->user->username }}</h5>
+                    {{ $item->topic->user->username }}</h5>
                 <p style="margin-left: 70px; font-size: 13px;">{{ date('d M Y',
                     strtotime($item->topic->updated_at)) }}</p>
                 {{-- <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -37,7 +37,7 @@
             <a href="{{ url('topic/'. encrypt($item->topic->id)) }}">
                 <button class="btn btn-outline-primary btn-sm float-right">See all response ></button>
             </a>
-            <p style="color: #435AE7; font-size: 15px;" class="my-1 mt-3">15 Answers</p>
+            <p style="color: #435AE7; font-size: 15px;" class="my-1 mt-3">{{ $item->topic->response_count }}  Answers</p>
         </div>
     </div>
 </div>

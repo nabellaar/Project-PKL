@@ -17,6 +17,9 @@ class LikeController extends Controller
     {
         if ($request->ajax()) {
             $like = Like::where('user_id', Auth::user()->id)
+            ->with(['topic' => function($q) {
+                return $q->withCount('response');
+            }])
             ->orderBy('id', 'DESC')
             ->paginate(5);
             return view('pages.includes.liked-list', compact('like'));

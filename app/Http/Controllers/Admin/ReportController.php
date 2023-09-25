@@ -90,12 +90,17 @@ class ReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->status = 0;
-        $user->save();
+        $response = Response::find($id);
+        if ($response->parent_id==0) {
+            $children = Response::where('parent_id', $response->id)->update([
+                'status' => $request->status
+            ]);
+        }
+        $response->status = $request->status;
+        $response->save();
         return response()->json([
             'status'    => true,
-            'message'   => 'User Blocked!',
+            'message'   => 'Response Updateded!',
         ]);
     }
 

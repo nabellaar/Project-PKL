@@ -55,7 +55,7 @@
         });
     }
 
-    function blockUser(e, id) {
+    function blockResponse(e, id) {
         e.preventDefault()
         const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -86,13 +86,133 @@
                     if (response.status == true) {
                         swalWithBootstrapButtons.fire(
                         'Blocked!',
-                        'User has been blocked.',
+                        'Response has been blocked.',
                         'success'
                         )   
                     } else {
                         swalWithBootstrapButtons.fire(
                         'Error!',
-                        'This user cant be blocked',
+                        'This response cant be blocked',
+                        'error'
+                        )
+                    }
+                    getReport(url)
+                }
+            });
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe',
+            'error'
+            )
+        }
+        })
+    }
+
+    function blockResponse(e, id) {
+        e.preventDefault()
+        const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, block it!',
+        cancelButtonText: 'Cancel!',
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "PUT",
+                url: "{{ url('admin/report') }}/"+id,
+                data: {
+                    status : 1,
+                },
+                cache: false,
+                headers: {
+                    'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        swalWithBootstrapButtons.fire(
+                        'Blocked!',
+                        'Response has been blocked.',
+                        'success'
+                        )   
+                    } else {
+                        swalWithBootstrapButtons.fire(
+                        'Error!',
+                        'This response cant be blocked',
+                        'error'
+                        )
+                    }
+                    getReport(url)
+                }
+            });
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe',
+            'error'
+            )
+        }
+        })
+    }
+
+    function unblockResponse(e, id) {
+        e.preventDefault()
+        const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, unblock it!',
+        cancelButtonText: 'Cancel!',
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "PUT",
+                url: "{{ url('admin/report') }}/"+id,
+                data: {
+                    status : 1,
+                },
+                cache: false,
+                headers: {
+                    'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        swalWithBootstrapButtons.fire(
+                        'Unblocked!',
+                        'Response has been UNblocked.',
+                        'success'
+                        )   
+                    } else {
+                        swalWithBootstrapButtons.fire(
+                        'Error!',
+                        'This response cant be unblocked',
                         'error'
                         )
                     }

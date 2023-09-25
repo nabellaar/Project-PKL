@@ -22,9 +22,11 @@
                                     <a href="javascript:void(0)" onclick="openReply(event, {{ $item->id }}, '{{ $item->user->username }}')">
                                         <span><i class="fa fa-reply"></i> reply</span>
                                     </a>
-                                    <a class="ml-4" href="javascript:void(0)" onclick="openReport(event, {{ $item->id }}, '{{ $item->user->username }}')">
+                                    @if (Auth::id() != $item->user->id)
+                                    <a class="ml-4" href="javascript:void(0)" onclick="openReport(event, {{ $item->id }}, '{{ $item->user->username }}', '{{app(table_name::class)->getTable()}}')">
                                         <span><i class="fa-solid fa-flag"></i> report</span>
                                     </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -36,7 +38,7 @@
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-8 d-flex">
-                                        <h5>{{ $children->user->full_name }}&nbsp;</h5>
+                                        <h5>{{ $children->user->username }}&nbsp;</h5>
                                         <span> &nbsp; {{ \Carbon\Carbon::parse($children->created_at)->diffForHumans(['short'=>true]) }}</span>
                                     </div>
                                     <div class="col-4">
@@ -44,9 +46,11 @@
                                             <a href="javascript:void(0)" onclick="openReply(event, {{ $item->id }}, '{{ $children->user->username }}')">
                                                 <span><i class="fa fa-reply"></i> reply</span>
                                             </a>
+                                            @if (Auth::id() != $children->user->id)
                                             <a class="ml-4" href="javascript:void(0)" onclick="openReport(event, {{ $children->id }}, '{{ $children->user->username }}')">
                                                 <span><i class="fa-solid fa-flag"></i> report</span>
                                             </a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +59,7 @@
                             </div>
                         </div> 
                         @endforeach
-                        <div class="collapse" id="collapseExample{{ $item->id }}">
+                        <div class="collapse mt-3" id="collapseExample{{ $item->id }}">
                             <form id="form-add-response{{ $item->id }}" method="post">
                                 @csrf
                                 <input type="hidden" name="topic_id" id="topic_id" value="{{ $item->topic_id }}">

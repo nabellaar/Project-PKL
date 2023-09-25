@@ -21,9 +21,9 @@
                     <div class="text-center">
                         <img src="{{ asset('img/'.$item->image) }}" alt="" class="img-fluid">
                     </div>
-                    <p style="color :#435AE7; font-size: 15px; margin-top: 35px;">{{ $item->response->count() }} Answer</p>
+                    <p style="color :#435AE7; font-size: 15px; margin-top: 35px;">{{ $item->response->where('status', 1)->count() }} Answer</p>
                     <hr>
-                    @foreach ($item->response as $response )
+                    @foreach ($item->response->where('user_id', Auth::id()) as $response )
                     <img style="aspect-ratio: 1/1;" width="60px" class="rounded-circle"
                         src="{{ $response->user->foto ? asset('img/profile/'.$response->user->foto) : asset('img/profile/default.jpg') }}" alt="">
                                             <h5 style=" font-size: 15px; color: #000; margin-left: 80px; margin-top:

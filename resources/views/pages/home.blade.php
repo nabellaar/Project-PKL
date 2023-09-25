@@ -14,7 +14,8 @@
                     @foreach ($topic as $item)
                     <div class="card shadow mb-4 col-lg-12 col-md-12">
                         <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
+                        <div
+                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
                             <div class="dropdown no-arrow">
                                 <img class="rounded-circle" width="50px" style="aspect-ratio: 1/1;"
                                     src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) :asset('img/profile/default.jpg') }}"
@@ -30,54 +31,63 @@
                         <div class="card-body">
                             <h5 class="user-title">{{ $item->title }}</h5>
                             <p class="user-content">{{ $item->content }}</p>
-                            <div class="">
+                            <div class="mb-3">
                                 <img src="{{ asset('img/'.$item->image) }}" alt="" width="300px">
                             </div>
-                            <button class="btn btn-response btn-outline-primary justify-content-center btn-sm" data-topic="{{ $item->id }}"><i class="fa-solid fa-share"></i> &nbsp;
+                            <button class="btn btn-response btn-outline-primary justify-content-center btn-sm"
+                                data-topic="{{ $item->id }}"><i class="fa-solid fa-share"></i> &nbsp;
                                 Add Response</button>
-                                <button class="btn btn-sm @if (!user_likes(Auth::user()->id, $item->id)) btn-outline-primary @else btn-primary @endif justify-content-center btn-like" data-user="{{Auth::user()->id}}" data-topic="{{$item->id}}"><i class="fa-solid fa-thumbs-up"></i>&nbsp;
-                                    @if (!user_likes(Auth::user()->id, $item->id)) Like @else Unlike @endif
-                                </button>
-                                    <a href="{{ url('topic/'. encrypt($item->id)) }}">
-                                        <button class="btn btn-see-rspn btn-outline-primary float-right btn-sm">See all response &nbsp;<i class="fa-solid fa-angle-right"></i></button>
-                                    </a>
-                                    <p class="my-1 mt-3 home-answer">{{ $item->response->count() }} answer</p>
+                            <button
+                                class="btn btn-sm @if (!user_likes(Auth::user()->id, $item->id)) btn-outline-primary @else btn-primary @endif justify-content-center btn-like"
+                                data-user="{{Auth::user()->id}}" data-topic="{{$item->id}}"><i
+                                    class="fa-solid fa-thumbs-up"></i>&nbsp;
+                                @if (!user_likes(Auth::user()->id, $item->id)) Like @else Unlike @endif
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-flag"></i>&nbsp;
+                                Report</button>
+                            <a href="{{ url('topic/'. encrypt($item->id)) }}">
+                                <button class="btn btn-see-rspn btn-outline-primary float-right btn-sm">See all response
+                                    &nbsp;<i class="fa-solid fa-angle-right"></i></button>
+                            </a>
+                            <p class="my-1 mt-3 home-answer">{{ $item->response->count() }} answer</p>
                         </div>
                     </div>
                     @endforeach
-                     <!-- Modal -->
-                     <div class="modal fade" id="commentModal" tabindex="-1" role="dialog"
-                     aria-labelledby="commentModalLabel" aria-hidden="true">
-                     <div class="modal-dialog" role="document">
-                         <div class="modal-content">
-                            <form id="form-add-response" method="post">
-                                @csrf
-                                <input type="hidden" name="topic_id" id="topic_id">
-                                <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
-                                <input type="hidden" name="parent_id" id="parent_id" value="0">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="commentModalLabel" style="color: #000000;">Add Response
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span class="badge badge-danger" aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <textarea name="content" id="content" class="form-control" rows="5"
-                                        placeholder="Enter your response"></textarea>
-                                    <span id="error-message"></span>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </form>
-                         </div>
-                     </div>
-                     </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="commentModal" tabindex="-1" role="dialog"
+                        aria-labelledby="commentModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form id="form-add-response" method="post">
+                                    @csrf
+                                    <input type="hidden" name="topic_id" id="topic_id">
+                                    <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" name="parent_id" id="parent_id" value="0">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="commentModalLabel" style="color: #000000;">Add
+                                            Response
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span class="badge badge-danger" aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <textarea name="content" id="content" class="form-control" rows="5"
+                                            placeholder="Enter your response"></textarea>
+                                        <span id="error-message"></span>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                     {{ $topic->appends($_GET)->links() }}
                 </div>
-                
+
             </div>
         </div>
 
@@ -97,13 +107,15 @@
                     <!-- Card Body -->
                     <div class="card-body">
                         @foreach ($trending as $trend )
-                        <img width="50px" style="aspect-ratio: 1/1;" class="rounded-circle" src="{{ $trend->user->foto ? asset('img/profile/'.$trend->user->foto) : asset('img/profile/default.jpg') }}" alt="">
+                        <img width="50px" style="aspect-ratio: 1/1;" class="rounded-circle"
+                            src="{{ $trend->user->foto ? asset('img/profile/'.$trend->user->foto) : asset('img/profile/default.jpg') }}"
+                            alt="">
                         <p class="user-trending">{{$trend->user->username}}</p>
                         <p class="time-trending">{{ date('d M Y', strtotime($trend->updated_at))}}</p>
                         <p class="title-trending">{{$trend->title}}</p>
                         <p class="content-trending">{{$trend->content}}</p>
-                        <p class="total-likes-trending">{{$trend->likes_count}} likes</p> 
-                            <hr>
+                        <p class="total-likes-trending">{{$trend->likes_count}} likes</p>
+                        <hr>
                         @endforeach
                     </div>
                 </div>
@@ -122,9 +134,11 @@
                     <!-- Card Body -->
                     <div class="card-body">
                         @foreach ($top_user as $top)
-                        <img width="50px" style="aspect-ratio: 1/1;" class="rounded-circle" src="{{ $top->foto ? asset('img/profile/'.$top->foto) : asset('img/profile/default.jpg') }}" alt="">
+                        <img width="50px" style="aspect-ratio: 1/1;" class="rounded-circle"
+                            src="{{ $top->foto ? asset('img/profile/'.$top->foto) : asset('img/profile/default.jpg') }}"
+                            alt="">
                         <p class="top-user">{{$top->username}}</p>
-                        <p class="user-post">{{$top->topic_count}} Topic</p>
+                        <p class="user-post float-right">{{$top->topic_count}} Topic</p>
                         <hr style="margin-top: 30px;">
                         @endforeach
                     </div>
@@ -180,14 +194,13 @@
         color: #435AE7;
         font-size: 10px;
         margin-top: -35px;
-        margin-left: 90%
+
     }
 
     .home-answer {
-        color: #435AE7; 
+        color: #435AE7;
         font-size: 15px;
     }
-
 </style>
 <style>
     .user-name {
@@ -221,7 +234,7 @@
 
     } */
 
-     .btn-see-rspn {
+    .btn-see-rspn {
         /* text-decoration: none; */
         background-color: white;
         /* color: #435AE7;
@@ -230,15 +243,15 @@
         font-size: 15px;
         /* color: #435AE7; */
         /* margin-right: 20%; */
-       
 
-    
+
+
     }
 </style>
 @endsection
 @section('scripts')
-    <script>
-        $.ajaxSetup({
+<script>
+    $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
@@ -323,5 +336,5 @@
                 }
             });
         });
-    </script>
+</script>
 @endsection
