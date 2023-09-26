@@ -79,7 +79,8 @@
                          <div class="modal-content">
                             <form id="form-report" method="post">
                                 @csrf
-                                <input type="hidden" name="response_id" id="response_id">
+                                <input type="hidden" name="table_id" id="table_id">
+                                <input type="hidden" name="table_name" id="table_name">
                                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="reportModalLabel" style="color: #000000;">Report
@@ -193,9 +194,10 @@
             $('#collapseExample'+ id).fadeToggle();
         }
 
-        function openReport(e, id, username) {
+        function openReport(e, id, username, table_name) {
             e.preventDefault()
-            $('#response_id').val(id);
+            $('#table_id').val(id);
+            $('#table_name').val(table_name);
             $('#reportModalLabel').html('Report '+ username);
             $('#reportModal').modal('show');
 

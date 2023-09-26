@@ -4,6 +4,7 @@
             <th>No</th>
             <th>Owner</th>
             <th>Report Content</th>
+            <th>Type</th>
             <th>Username</th>
             <th>Reason</th>
             <th>Report Time</th>
@@ -15,8 +16,13 @@
         @foreach ($report as $item) 
         <tr>
             <td>{{ ($report->currentpage()-1) * $report->perpage() + $loop->index + 1 }}</td>
-            <td>{{$item->user->username}}</td>
+            <td>{{$item->username}}</td>
             <td>{{$item->content}}</td>
+            <td>
+                @foreach ($item->report as $r)
+                   {{ $r->table_name }} <br>
+                @endforeach
+            </td>
             <td>
                 @foreach ($item->report as $r)
                    {{ $r->user->username }} <br>

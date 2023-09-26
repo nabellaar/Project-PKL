@@ -19,10 +19,8 @@ class CreateReportsTable extends Migration
                     ->constrained('users')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
-            $table->foreignId('response_id')
-                    ->constrained('responses')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+            $table->foreignId('table_id');
+            $table->string('table_name')->nullable();
             $table->string('reason');
             $table->timestamps();
         });

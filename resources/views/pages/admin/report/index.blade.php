@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Report Response</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Report</h6>
         </div>
         <div class="card-body">
             <form
@@ -14,6 +14,11 @@
                         placeholder="Search for Report" aria-label="Search" aria-describedby="basic-addon2">
                 </div>
             </form>
+            <select class="form-control col-3" id="report-select" name="report_select">
+                <option value="users" selected>User</option>
+                <option value="topics">Topic</option>
+                <option value="responses">Response</option>
+              </select>
             <div class="col-12 text-center" id="load-icon" style="display: none">
                 <img width="50px" src="{{ asset('img/loading.gif')}}" alt="">
             </div>
@@ -27,6 +32,8 @@
 @section('scripts')
 <script>
     var url = "{{ route('admin.report.index') }}"
+    var report = $('#report-select').val();
+    console.log(report);
     getReport(url)
 
     $('#search-report').keyup(function (e) { 
@@ -39,6 +46,9 @@
         $.ajax({
             type: "GET",
             url: url,
+            data: {
+                report: report
+            },
             cache: false,
             beforeSend: function () {
                 $('#load-icon').show();
@@ -136,7 +146,7 @@
                 type: "PUT",
                 url: "{{ url('admin/report') }}/"+id,
                 data: {
-                    status : 1,
+                    status : 0,
                 },
                 cache: false,
                 headers: {

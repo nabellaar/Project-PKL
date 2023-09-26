@@ -37,7 +37,7 @@ class ReportController extends Controller
     {
         $report = Report::create([
             'user_id' => $request->user_id,
-            'response_id' => $request->response_id,
+            'table_id' => $request->table_id,
             'reason' => $request->reason,
             'table_name' => $request->table_name,
         ]);

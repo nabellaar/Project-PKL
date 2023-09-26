@@ -43,8 +43,11 @@
                                     class="fa-solid fa-thumbs-up"></i>&nbsp;
                                 @if (!user_likes(Auth::user()->id, $item->id)) Like @else Unlike @endif
                             </button>
-                            <button class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-flag"></i>&nbsp;
-                                Report</button>
+                            @if (Auth::id() != $item->user->id)
+                            <button class="btn btn-outline-primary btn-sm" href="javascript:void(0)" onclick="openReport(event, {{ $item->id }}, '{{ $item->user->username }}', '{{app(App\Models\Topic::class)->getTable()}}')">
+                                <span><i class="fa-solid fa-flag"></i> report</span>
+                            </button>
+                            @endif
                             <a href="{{ url('topic/'. encrypt($item->id)) }}">
                                 <button class="btn btn-see-rspn btn-outline-primary float-right btn-sm">See all response
                                     &nbsp;<i class="fa-solid fa-angle-right"></i></button>
@@ -53,6 +56,49 @@
                         </div>
                     </div>
                     @endforeach
+                     <!-- Modal Report -->
+                     <div class="modal fade" id="reportModal" tabindex="-1" role="dialog"
+                     aria-labelledby="commentModalLabel" aria-hidden="true">
+                     <div class="modal-dialog" role="document">
+                         <div class="modal-content">
+                            <form id="form-report" method="post">
+                                @csrf
+                                <input type="hidden" name="table_id" id="table_id">
+                                <input type="hidden" name="table_name" id="table_name">
+                                <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="reportModalLabel" style="color: #000000;">Report
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span class="badge badge-danger" aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="reason1" type="radio" name="reason" value="Spam">
+                                        <label class="form-check-label" for="reason1">Spam</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="reason2" type="radio" name="reason" value="Hate commment">
+                                        <label class="form-check-label" for="reason2">Hate commment</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="reason3" type="radio" name="reason" value="Misinformation">
+                                        <label class="form-check-label" for="reason3">Misinformation</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="reason3" type="radio" name="reason" value="Bullying">
+                                        <label class="form-check-label" for="reason3">Bullying</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                         </div>
+                     </div>
+                     </div>
                     <!-- Modal -->
                     <div class="modal fade" id="commentModal" tabindex="-1" role="dialog"
                         aria-labelledby="commentModalLabel" aria-hidden="true">
@@ -304,6 +350,39 @@
             $('#topic_id').val(topic_id);
             $('#commentModal').modal('show');
         });
+
+        function openReport(e, id, username, table_name) {
+            e.preventDefault()
+            $('#table_id').val(id);
+            $('#table_name').val(table_name);
+            $('#reportModalLabel').html('Report '+ username);
+            $('#reportModal').modal('show');
+
+        }
+
+        $('#form-report').submit(function (e) { 
+            e.preventDefault();
+            var data = new FormData($($('#form-report'))[0])
+            $.ajax({
+                type: "POST",
+                url: "{{ route('report.store')}}",
+                data: data,
+                contentType: false,
+                processData: false,
+                cache: false,
+                success: function (response) {
+                    $('#form-report').trigger('reset');
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    $('#reportModal').modal('hide');
+                }
+            });
+        }); 
 
         $('#form-add-response').submit(function (e) { 
             e.preventDefault();

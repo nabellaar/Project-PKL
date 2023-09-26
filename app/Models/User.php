@@ -56,4 +56,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Topic::class, 'user_id', 'id');
     }
+    public function report()
+    {
+        return $this->hasMany(Report::class, 'table_id', 'id');
+    }
 }

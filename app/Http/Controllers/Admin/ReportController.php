@@ -18,10 +18,17 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            // $report = Report::withCount('response')->orderByDESC('response_count');
-            $report = Response::withCount('report')
-                ->having('report_count', '!=', 0)
-                ->orderByDESC('report_count');
+            if ($request->report=='users') {
+                $report = User::withCount('report')
+                    ->having('report_count', '!=', 0)
+                    ->orderByDESC('report_count');
+            }
+            if ($request->report=='topics') {
+                # code...
+            }
+            if ($request->report=='responses') {
+                # code...
+            }
             $search = $request->search;
             if ($search) {
                 $report = $report->where('content', 'like', '%'.$search.'%')

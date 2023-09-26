@@ -23,7 +23,7 @@
                                         <span><i class="fa fa-reply"></i> reply</span>
                                     </a>
                                     @if (Auth::id() != $item->user->id)
-                                    <a class="ml-4" href="javascript:void(0)" onclick="openReport(event, {{ $item->id }}, '{{ $item->user->username }}', '{{app(table_name::class)->getTable()}}')">
+                                    <a class="ml-4" href="javascript:void(0)" onclick="openReport(event, {{ $item->id }}, '{{ $item->user->username }}', '{{app(App\Models\Response::class)->getTable()}}')">
                                         <span><i class="fa-solid fa-flag"></i> report</span>
                                     </a>
                                     @endif
@@ -47,7 +47,7 @@
                                                 <span><i class="fa fa-reply"></i> reply</span>
                                             </a>
                                             @if (Auth::id() != $children->user->id)
-                                            <a class="ml-4" href="javascript:void(0)" onclick="openReport(event, {{ $children->id }}, '{{ $children->user->username }}')">
+                                            <a class="ml-4" href="javascript:void(0)" onclick="openReport(event, {{ $children->id }}, '{{ $children->user->username }}', '{{app(App\Models\Response::class)->getTable()}}')">
                                                 <span><i class="fa-solid fa-flag"></i> report</span>
                                             </a>
                                             @endif
