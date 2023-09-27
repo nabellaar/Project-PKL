@@ -18,16 +18,16 @@ class Report extends Model
 
     public function response()
     {
-        return $this->belongsTo(Response::class, 'table_id', 'id')->where('table_name', 'responses');
+        return $this->belongsTo(Response::class, 'table_id', 'id');
     }
 
     public function topic()
     {
-        return $this->belongsTo(Topic::class, 'table_id', 'id')->where('table_name', 'topics');
+        return $this->belongsTo(Topic::class, 'table_id', 'id');
     }
 
     public function member()
     {
-        return $this->belongsTo(User::class, 'table_id', 'id')->where('table_name', 'users');
+        return $this->belongsTo(User::class, 'table_id', 'id');
     }
 }

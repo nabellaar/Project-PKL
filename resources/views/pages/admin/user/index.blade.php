@@ -56,12 +56,12 @@
         });
     }
 
-    function deleteUser(e, id) {
+    function blockUser(e, id) {
         e.preventDefault()
         const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
+            confirmButton: 'm-1 btn btn-success',
+            cancelButton: 'm-1 btn btn-danger'
         },
         buttonsStyling: false
         })
@@ -71,29 +71,29 @@
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
+        confirmButtonText: 'Yes, block it!',
         cancelButtonText: 'Cancel!',
         reverseButtons: true
         }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                type: "DELETE",
+                type: "GET",
                 url: "{{ url('admin/user') }}/"+id,
-                cache: false,
-                headers: {
-                    'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                data: {
+                    status : 0,
                 },
+                cache: false,
                 success: function (response) {
                     if (response.status == true) {
                         swalWithBootstrapButtons.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
+                        'Blocked!',
+                        'User has been blocked.',
                         'success'
                         )   
                     } else {
                         swalWithBootstrapButtons.fire(
                         'Error!',
-                        'This user owns a topic so it cant be deleted',
+                        'This user cant be blocked',
                         'error'
                         )
                     }
@@ -111,12 +111,63 @@
             )
         }
         })
-            // var result = confirm('Apakah Anda Yakin Menghapus Topic  '+title+' ? ')
-            // if (result) {
-            //     
-            // } else {
-            //     alert('Data Aman!')
-            // }
+    }
+
+    function unblockUser(e, id) {
+        e.preventDefault()
+        const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'm-1 btn btn-success',
+            cancelButton: 'm-1 btn btn-danger'
+        },
+        buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, unblock it!',
+        cancelButtonText: 'Cancel!',
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "GET",
+                url: "{{ url('admin/user') }}/"+id,
+                data: {
+                    status : 1,
+                },
+                cache: false,
+                success: function (response) {
+                    if (response.status == true) {
+                        swalWithBootstrapButtons.fire(
+                        'Unblocked!',
+                        'User has been Unblocked.',
+                        'success'
+                        )   
+                    } else {
+                        swalWithBootstrapButtons.fire(
+                        'Error!',
+                        'This response cant be unblocked',
+                        'error'
+                        )
+                    }
+                    getUser(url)
+                }
+            });
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe',
+            'error'
+            )
         }
+        })
+    }
 </script>
 @endsection

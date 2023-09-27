@@ -42,6 +42,12 @@
         getReport(url + '?search=' + search)
     });
 
+    $('#report-select').change(function (e) { 
+        e.preventDefault();
+        report = $(this).val();
+        getReport(url)
+    });
+
     function getReport(url) {
         $.ajax({
             type: "GET",

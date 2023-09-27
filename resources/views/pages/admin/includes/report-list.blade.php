@@ -16,12 +16,10 @@
         @foreach ($report as $item) 
         <tr>
             <td>{{ ($report->currentpage()-1) * $report->perpage() + $loop->index + 1 }}</td>
-            <td>{{$item->username}}</td>
+            <td>{{$item->username ? $item->username : $item->user->username}}</td>
             <td>{{$item->content}}</td>
             <td>
-                @foreach ($item->report as $r)
-                   {{ $r->table_name }} <br>
-                @endforeach
+                {{ $item->report[0]->table_name }}
             </td>
             <td>
                 @foreach ($item->report as $r)

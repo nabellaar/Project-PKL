@@ -23,6 +23,10 @@ class Topic extends Model
     {
         return $this->hasMany(Response::class, 'topic_id', 'id');
     }
+    public function report()
+    {
+        return $this->hasMany(Report::class, 'table_id', 'id')->where('table_name', 'topics');
+    }
 
 }
 

@@ -17,13 +17,13 @@
                         <div
                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
                             <div class="dropdown no-arrow">
-                                <img class="rounded-circle" width="50px" style="aspect-ratio: 1/1;"
-                                    src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) :asset('img/profile/default.jpg') }}"
-                                    alt="">
-                                <h5 class="user-name">{{ $item->user->username }}</h5>
-                                <p class="user-date">{{ date('d M Y', strtotime($item->updated_at)) }}</p>
-                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a href="{{ url('profile/'.$item->user->username) }}" class="text-decoration-none">
+                                    <img class="rounded-circle" width="50px" style="aspect-ratio: 1/1;"
+                                        src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) :asset('img/profile/default.jpg') }}"
+                                        alt="">
+                                    <h5 class="user-name">{{ $item->user->username }}</h5>
+                                    <p class="user-date">{{ date('d M Y', strtotime($item->updated_at)) }}</p>
+
                                 </a>
                             </div>
                         </div>

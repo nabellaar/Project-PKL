@@ -58,6 +58,6 @@ class User extends Authenticatable
     }
     public function report()
     {
-        return $this->hasMany(Report::class, 'table_id', 'id');
+        return $this->hasMany(Report::class, 'table_id', 'id')->where('table_name', 'users');
     }
 }

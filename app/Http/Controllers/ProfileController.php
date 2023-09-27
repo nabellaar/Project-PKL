@@ -47,9 +47,10 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($username)
     {
-        //
+        $profile = User::where('username', $username)->first();
+        return view('pages.detail', compact('profile')); 
     }
 
     /**

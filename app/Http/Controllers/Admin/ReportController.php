@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Report;
 use App\Models\Response;
+use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,10 +25,14 @@ class ReportController extends Controller
                     ->orderByDESC('report_count');
             }
             if ($request->report=='topics') {
-                # code...
+                $report = Topic::withCount('report')
+                    ->having('report_count', '!=', 0)
+                    ->orderByDESC('report_count');
             }
             if ($request->report=='responses') {
-                # code...
+                $report = Response::withCount('report')
+                    ->having('report_count', '!=', 0)
+                    ->orderByDESC('report_count');
             }
             $search = $request->search;
             if ($search) {

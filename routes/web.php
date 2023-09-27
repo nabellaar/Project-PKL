@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/response', ResponseController::class);
     Route::resource('/answer', AnswerController::class);
     Route::resource('/report', ReportController::class);
+    Route::get('/profile/{username}', [ProfileController::class , 'show']);
     Route::put('/profile/{id}', [ProfileController::class, 'update']);
 
     Route::prefix('/admin')->name('admin.')->middleware(AdminMiddleware::class)->group(function() {
@@ -50,6 +51,9 @@ Route::middleware('auth')->group(function () {
     });
 
 
+    Route::get('/detail', function () {
+        return view('pages.detail');
+    });
     Route::get('/admin', function () {
         return view('admin');
     });

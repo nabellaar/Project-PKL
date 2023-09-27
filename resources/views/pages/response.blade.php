@@ -11,6 +11,7 @@
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
                         <div class="dropdown no-arrow">
+                            <a href="{{ url('profile/'.$topic->user->username) }}" class="text-decoration-none">
                             <img class="rounded-circle" style="aspect-ratio: 1/1;" width="50px"
                                 src="{{ $topic->user->foto ? asset('img/profile/'.$topic->user->foto) : asset('img/profile/default.jpg') }}"
                                 alt="">
@@ -19,6 +20,7 @@
                             <p style="margin-left: 60px; font-size: 12px;">{{ date('d M Y',
                                 strtotime($topic->updated_at))
                                 }}</p>
+                            </a>
                         </div>
                     </div>
                     <!-- Card Body -->
@@ -32,7 +34,9 @@
                         <button class="btn-response btn btn-outline-primary p-2 justify-content-center my-3 btn-sm" data-topic="{{ $topic->id }}"><i class="fa-solid fa-share"></i>&nbsp; 
                             Add Response</button>
                         @if (Auth::id() != $topic->user->id)
-                        <button class="btn btn-outline-primary btn-sm float-right"><i class="fa-solid fa-flag"></i>&nbsp;Report</button>
+                        <button class="btn btn-outline-primary btn-sm" href="javascript:void(0)" onclick="openReport(event, {{ $topic->id }}, '{{ $topic->user->username }}', '{{app(App\Models\Topic::class)->getTable()}}')">
+                            <span><i class="fa-solid fa-flag"></i> report</span>
+                        </button>
                         @endif
                         <hr>
                         <div class="col-12 text-center" id="load-icon" style="display: none">
