@@ -20,11 +20,15 @@ class DashboardController extends Controller
         ->paginate(5);
         $likes = new Like();
         $trending = Topic::withCount('likes')
+            ->where('status', 1)
             ->having('likes_count', '!=', 0)
             ->orderByDESC('likes_count')
             ->limit(5)    
             ->get();
-        $top_user = User::withCount('topic')
+        $top_user = User::withCount(['topic' => function($q){
+            $q->where('status', 1);
+        }])
+            ->where('status', 1)
             ->having('topic_count', '!=', 0)
             ->orderByDESC('topic_count')
             ->limit(5)    
@@ -40,7 +44,13 @@ class DashboardController extends Controller
        })
        ->orderby('id', 'DESC')
        ->paginate(5);
+       $user = User::where('username', 'like', '%'.$keyword.'%')
+            ->orWhere('full_name', 'like', '%'.$keyword.'%')
+            ->orWhere('email', 'like', '%'.$keyword.'%')
+            ->orWhere('no_handphone', 'like', '%'.$keyword.'%')
+            ->where('status', 1)
+            ->get();
 
-       return view('pages.search', compact('topic'));
+       return view('pages.search', compact('topic', 'user'));
     }
 }

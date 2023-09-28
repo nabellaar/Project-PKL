@@ -10,13 +10,39 @@
                 <img width="50px" src="{{ asset('img/loading.gif')}}" alt="">
             </div>
             <div class="row" id="content-topic">
+                <div class="card">
+                    <div class="container bootstrap snippets bootdey">
+                        <div class="header">
+                            <h3 class="text-muted prj-name">
+                                <span class="fa fa-users fa-2x"></span>
+                                Users
+                            </h3>
+                        </div>
+
+                        <div class="jumbotron" style="min-height:400px;height:auto;">
+                            <ul class="list-group">
+                                @foreach ($user as $item)
+                                <li class="list-group-item user-item text-left">
+                                    <img class="img-circle img-user img-thumbnail "
+                                    src="{{ $item->foto ? asset('img/profile/'.$item->foto) :asset('img/profile/default.jpg') }}">
+                                    <h3>
+                                        <a href="{{ url('profile/'.$item->username) }}" class="text-decoration-none">{{ $item->full_name }}</a><br>
+                                    </h3>
+                                </li>     
+                                @endforeach
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
                 <div class="infinity-scroll">
                     @foreach ($topic as $item)
                     <div class="card shadow mb-4 col-lg-12 col-md-12">
                         <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
+                        <div
+                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
                             <div class="dropdown no-arrow">
-                                <img class="rounded-circle"  width="50px" style="aspect-ratio: 1/1;"
+                                <img class="rounded-circle" width="50px" style="aspect-ratio: 1/1;"
                                     src="{{ $item->user->foto ? asset('img/profile/'.$item->user->foto) :asset('img/profile/default.jpg') }}"
                                     alt="">
                                 <h5 class="user-name">{{ $item->user->username }}</h5>
@@ -42,14 +68,15 @@
                             </a>
                             <p style="color: #435AE7; font-size: 15px;" class="my-3 pt-2">15 Answers</p>
                         </div>
-    
+
                         <!-- Modal -->
                         <div class="modal fade" id="commentModal" tabindex="-1" role="dialog"
                             aria-labelledby="commentModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="commentModalLabel" style="color: #000000;">Add Response
+                                        <h5 class="modal-title" id="commentModalLabel" style="color: #000000;">Add
+                                            Response
                                         </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -60,13 +87,14 @@
                                             placeholder="Enter your response"></textarea>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary">Submit</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-    
+
                     </div>
                     @endforeach
                     {{ $topic->appends($_GET)->links() }}
@@ -173,8 +201,8 @@
 </style>
 @endsection
 @section('scripts')
-    <script>
-        $(function () {
+<script>
+    $(function () {
             $('ul.pagination').hide();
             $('.infinity-scroll').jscroll({
                 autoTrigger: true,
@@ -187,5 +215,10 @@
                 }
             })
         });
-    </script>
+</script>
+@endsection
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/search.css')}}">
+    <link href="https://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 @endsection

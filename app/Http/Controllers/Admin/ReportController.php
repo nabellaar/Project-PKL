@@ -102,17 +102,25 @@ class ReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = Response::find($id);
-        if ($response->parent_id==0) {
-            $children = Response::where('parent_id', $response->id)->update([
-                'status' => $request->status
-            ]);
+        if ($request->table_name =='users') {
+            $report = User::find($id);
+            $report->status = $request->status;
+            $report->save(); 
         }
-        $response->status = $request->status;
-        $response->save();
+        if ($request->table_name =='topics') {
+            $report = Topic::find($id);
+            $report->status = $request->status;
+            $report->save(); 
+        }
+        if ($request->table_name =='responses') {
+            $report = Response::find($id);
+            $report->status = $request->status;
+            $report->save(); 
+        }
+
         return response()->json([
             'status'    => true,
-            'message'   => 'Response Updateded!',
+            'message'   => 'Report Updated!',
         ]);
     }
 

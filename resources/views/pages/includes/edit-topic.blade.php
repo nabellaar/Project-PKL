@@ -23,6 +23,7 @@
                         required>{{ $topic->content }}</textarea>
                 </div>
                 @if ($topic->status != 3)
+                @if ($topic->status != 0)
                 <div class="form-group">
                     <label for="commentContent" style="color: #435AE7;">Status</label>
                     <div class="form-check">
@@ -34,6 +35,7 @@
                         <label class="form-check-label" for="flexRadioDefault2">Draft</label>
                     </div>
                 </div>
+                @endif
                 @endif
                 <div class="form-group">
                     <label for="commentImage" style="color: #435AE7;">Image</label>

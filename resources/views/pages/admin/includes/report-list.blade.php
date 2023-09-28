@@ -43,11 +43,10 @@
             </td>
             <td>
                 @if ($item->status == '0')
-                <a href="javascript:void(0)" onclick="unblockResponse(event, {{$item->id}})" class="btn-status btn btn-outline-orange btn-sm m-2"><i class="fa-solid fa-xmark"></i>&nbsp; Unblock</a>
+                <a href="javascript:void(0)" onclick="unblockResponse(event, {{$item->id}}, '{{$item->report[0]->table_name}}', 1)" class="btn-status btn btn-outline-orange btn-sm m-2"><i class="fa-solid fa-xmark"></i>&nbsp; Unblock</a>
                 @endif
-                <button class="btn btn-outline-danger btn-sm" onclick="deleteReport(event, {{$item->id}})"><i class="fa-solid fa-trash-can"></i>&nbsp; Delete</button>
                 @if ($item->status != '0')
-                <button class="btn btn-outline-dark btn-sm" onclick="blockResponse(event, {{$item->id}})"><i class="fa-solid fa-ban"></i>&nbsp;Block</button>   
+                <button class="btn btn-outline-dark btn-sm" onclick="blockResponse(event, {{$item->id}}, '{{$item->report[0]->table_name}}', 0)"><i class="fa-solid fa-ban"></i>&nbsp;Block</button>   
                 @endif
             </td>
         </tr>

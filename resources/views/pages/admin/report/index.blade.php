@@ -71,69 +71,12 @@
         });
     }
 
-    function blockResponse(e, id) {
+    function blockResponse(e, id, table_name, status) {
         e.preventDefault()
         const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-        })
-
-        swalWithBootstrapButtons.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, block it!',
-        cancelButtonText: 'Cancel!',
-        reverseButtons: true
-        }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                type: "PUT",
-                url: "{{ url('admin/report') }}/"+id,
-                cache: false,
-                headers: {
-                    'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (response) {
-                    if (response.status == true) {
-                        swalWithBootstrapButtons.fire(
-                        'Blocked!',
-                        'Response has been blocked.',
-                        'success'
-                        )   
-                    } else {
-                        swalWithBootstrapButtons.fire(
-                        'Error!',
-                        'This response cant be blocked',
-                        'error'
-                        )
-                    }
-                    getReport(url)
-                }
-            });
-        } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-        ) {
-            swalWithBootstrapButtons.fire(
-            'Cancelled',
-            'Your imaginary file is safe',
-            'error'
-            )
-        }
-        })
-    }
-
-    function blockResponse(e, id) {
-        e.preventDefault()
-        const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
+            confirmButton: 'btn btn-success m-1',
+            cancelButton: 'btn btn-danger m-1'
         },
         buttonsStyling: false
         })
@@ -152,7 +95,8 @@
                 type: "PUT",
                 url: "{{ url('admin/report') }}/"+id,
                 data: {
-                    status : 0,
+                    table_name,
+                    status
                 },
                 cache: false,
                 headers: {
@@ -162,13 +106,13 @@
                     if (response.status == true) {
                         swalWithBootstrapButtons.fire(
                         'Blocked!',
-                        'Response has been blocked.',
+                        'Report has been blocked.',
                         'success'
                         )   
                     } else {
                         swalWithBootstrapButtons.fire(
                         'Error!',
-                        'This response cant be blocked',
+                        'This report cant be blocked',
                         'error'
                         )
                     }
@@ -188,12 +132,12 @@
         })
     }
 
-    function unblockResponse(e, id) {
+    function unblockResponse(e, id, table_name, status) {
         e.preventDefault()
         const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
+            confirmButton: 'btn btn-success m-1',
+            cancelButton: 'btn btn-danger m-1'
         },
         buttonsStyling: false
         })
@@ -212,7 +156,8 @@
                 type: "PUT",
                 url: "{{ url('admin/report') }}/"+id,
                 data: {
-                    status : 1,
+                    status,
+                    table_name
                 },
                 cache: false,
                 headers: {
@@ -222,13 +167,13 @@
                     if (response.status == true) {
                         swalWithBootstrapButtons.fire(
                         'Unblocked!',
-                        'Response has been UNblocked.',
+                        'Report has been unblocked.',
                         'success'
                         )   
                     } else {
                         swalWithBootstrapButtons.fire(
                         'Error!',
-                        'This response cant be unblocked',
+                        'This report cant be unblocked',
                         'error'
                         )
                     }
