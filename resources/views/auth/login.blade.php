@@ -24,6 +24,7 @@
             background-image: url('../img/bglogin.jpg');
             background-size: cover;
         }
+
         .card-login {
             margin-top: 100px;
         }
@@ -38,7 +39,7 @@
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ Session::get('error') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span>
             </button>
         </div>
         @endif
@@ -61,28 +62,30 @@
                                         @csrf
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp" name="email" value="{{old('email')}}" required autofocus @error('email') is-invalid @enderror
-                                                placeholder="Enter Email Address...">
-                                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                                id="exampleInputEmail" aria-describedby="emailHelp" name="email"
+                                                value="{{old('email')}}" required autofocus @error('email') is-invalid
+                                                @enderror placeholder="Enter Email Address...">
+                                            @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"  @error('password') is-invalid @enderror
-                                                placeholder="Password" id="password"
-                                                name="password"
-                                                required autocomplete="current-password">
-                                                @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
+                                            <input type="password" class="form-control form-control-user"
+                                                @error('password') is-invalid @enderror placeholder="Password"
+                                                id="password" name="password" required autocomplete="current-password">
+                                            @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                             @enderror
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck"
+                                                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                    name="remember">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>
@@ -94,8 +97,8 @@
                                     <hr>
                                     <div class="text-center">
                                         @if (Route::has('password.request'))
-                                <a class="small" href="{{ route('password.request') }}">Forgot Password?</a>
-                                @endif
+                                        <a class="small" href="{{ route('password.request') }}">Forgot Password?</a>
+                                        @endif
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="{{ route('register') }}">Create an Account!</a>

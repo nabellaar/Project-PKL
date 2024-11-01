@@ -13,8 +13,8 @@
                 <div class="card">
                     <div class="container bootstrap snippets bootdey">
                         <div class="header">
-                            <h3 class="text-muted prj-name">
-                                <span class="fa fa-users fa-2x"></span>
+                            <h3 class="mt-3 prj-name" style="color: #435AE7">
+                                <i class="fa-solid fa-users-line"></i>
                                 Users
                             </h3>
                         </div>
@@ -23,12 +23,14 @@
                             <ul class="list-group">
                                 @foreach ($user as $item)
                                 <li class="list-group-item user-item text-left">
-                                    <img class="img-circle img-user img-thumbnail "
-                                    src="{{ $item->foto ? asset('img/profile/'.$item->foto) :asset('img/profile/default.jpg') }}">
+                                    <img class="img-circle img-user img-thumbnail rounded-circle" width="50px;"
+                                        style="aspect-ratio: 1/1;"
+                                        src="{{ $item->foto ? asset('img/profile/'.$item->foto) :asset('img/profile/default.jpg') }}">
                                     <h3>
-                                        <a href="{{ url('profile/'.$item->username) }}" class="text-decoration-none">{{ $item->full_name }}</a><br>
+                                        <a href="{{ url('profile/'.$item->username) }}" class="text-decoration-none">{{
+                                            $item->full_name }}</a><br>
                                     </h3>
-                                </li>     
+                                </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -218,7 +220,7 @@
 </script>
 @endsection
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/search.css')}}">
-    <link href="https://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ asset('css/search.css')}}">
+<link href="https://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 @endsection

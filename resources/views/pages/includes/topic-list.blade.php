@@ -17,7 +17,7 @@
             <h5 style="color: #435AE7">{{ $item->title }}</h5>
             <p style="color:#000; font-size: 15px; margin-top: 15px;">{{ $item->content }}</p>
             <div class="text-center">
-                <img src="{{ asset('img/'.$item->image) }}" alt="" class="img-fluid">
+                <img src="{{ asset('img/'.$item->image) }}" width="50%" alt="" class="img-fluid">
             </div>
             <hr style="margin-top: 30px;">
             <img class="rounded-circle" style="aspect-ratio: 1/1;" width="30px"

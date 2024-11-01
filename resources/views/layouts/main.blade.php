@@ -101,7 +101,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal -->
+                <!-- Modal Create Topic-->
                 <div class="modal fade" id="addTopic" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel"
                 aria-hidden="true">
                     <div class="modal-dialog" role="document">
